@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://e1rsk7bqeic2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_llr1m"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_llr1m")
+
+[node name="MainUI" type="CanvasLayer" parent="."]
+
+[node name="Play" type="Button" parent="MainUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = -137.5
+offset_right = 123.5
+offset_bottom = -22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "PLAY"
+
+[node name="Quit" type="Button" parent="MainUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.5
+offset_top = 5.5
+offset_right = 123.5
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "QUIT"
+
+[connection signal="pressed" from="MainUI/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MainUI/Quit" to="." method="_on_quit_pressed"]

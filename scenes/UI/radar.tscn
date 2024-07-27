@@ -1,0 +1,114 @@
+[gd_scene load_steps=15 format=3 uid="uid://dccymvi3jqmpu"]
+
+[ext_resource type="Script" path="res://scenes/UI/radar.gd" id="1_c525x"]
+[ext_resource type="Texture2D" uid="uid://bxhst3w5w1cai" path="res://graphics/UI/RadarOuterFrame.png" id="2_1t1og"]
+[ext_resource type="Texture2D" uid="uid://gbheu2ia7s4a" path="res://graphics/UI/Grid_Box.png" id="3_0flro"]
+[ext_resource type="Texture2D" uid="uid://cv514scugj4rb" path="res://graphics/UI/PlayerMarker.png" id="3_wpoxc"]
+[ext_resource type="Texture2D" uid="uid://c07mroflf8vqn" path="res://graphics/UI/ActiveEnemyMarker.png" id="4_0rd3q"]
+[ext_resource type="Texture2D" uid="uid://chaujflx2mwyu" path="res://graphics/player/circle.png" id="4_rd7ha"]
+[ext_resource type="Texture2D" uid="uid://v0vyiwwrklbk" path="res://graphics/UI/PassiveEnemyMarker.png" id="5_6kp62"]
+[ext_resource type="Texture2D" uid="uid://dv2yl5nq5j5n7" path="res://graphics/UI/PickupMarker.png" id="6_hhx76"]
+[ext_resource type="Texture2D" uid="uid://c6qdoc8newmwn" path="res://graphics/UI/Radar Sweep Alt.png" id="8_3olu2"]
+
+[sub_resource type="Gradient" id="Gradient_dn3jy"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0.231373, 0.109804, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r1joi"]
+gradient = SubResource("Gradient_dn3jy")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_21lv4"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5o37r"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dehf6"]
+light_mode = 2
+
+[node name="Radar" type="MarginContainer"]
+light_mask = 0
+offset_right = 440.0
+offset_bottom = 440.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_c525x")
+
+[node name="BG" type="TextureRect" parent="."]
+light_mask = 2
+layout_mode = 2
+texture = SubResource("GradientTexture1D_r1joi")
+
+[node name="GridFrame" type="MarginContainer" parent="."]
+light_mask = 0
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Grid" type="TextureRect" parent="GridFrame"]
+light_mask = 2
+custom_minimum_size = Vector2(340, 340)
+layout_mode = 2
+texture = ExtResource("3_0flro")
+stretch_mode = 1
+
+[node name="PlayerMarker" type="Sprite2D" parent="GridFrame/Grid"]
+light_mask = 0
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("3_wpoxc")
+
+[node name="PointLight2D" type="PointLight2D" parent="GridFrame/Grid/PlayerMarker"]
+scale = Vector2(1.53846, 1.53846)
+color = Color(0, 0.815686, 0, 1)
+range_layer_max = 1
+range_item_cull_mask = 2
+texture = ExtResource("4_rd7ha")
+texture_scale = 0.02
+
+[node name="ActiveEnemyMarker" type="Sprite2D" parent="GridFrame/Grid"]
+visible = false
+light_mask = 2
+z_index = 1
+material = SubResource("CanvasItemMaterial_21lv4")
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("4_0rd3q")
+
+[node name="PassiveEnemyMarker" type="Sprite2D" parent="GridFrame/Grid"]
+visible = false
+modulate = Color(1, 0, 1, 1)
+light_mask = 2
+z_index = 1
+material = SubResource("CanvasItemMaterial_5o37r")
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("5_6kp62")
+
+[node name="PickupMarker" type="Sprite2D" parent="GridFrame/Grid"]
+visible = false
+modulate = Color(1, 0.54902, 1, 1)
+light_mask = 2
+z_index = 1
+material = SubResource("CanvasItemMaterial_dehf6")
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_hhx76")
+
+[node name="ScanLine" type="PointLight2D" parent="GridFrame"]
+position = Vector2(210, 210)
+energy = 1.5
+range_layer_max = 1
+range_item_cull_mask = 2
+texture = ExtResource("8_3olu2")
+offset = Vector2(131.5, -125)
+texture_scale = 0.7
+
+[node name="OuterFrame" type="NinePatchRect" parent="."]
+light_mask = 0
+layout_mode = 2
+texture = ExtResource("2_1t1og")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64

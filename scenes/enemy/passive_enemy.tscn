@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds0co35h76j17"]
+
+[ext_resource type="Script" path="res://scenes/enemy/passive_enemy.gd" id="1_isvv8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjuto"]
+size = Vector2(12, 12)
+
+[node name="PassiveEnemy" type="Area2D" groups=["Radar_Entity"]]
+collision_layer = 2
+input_pickable = false
+script = ExtResource("1_isvv8")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.305882, 0, 0.796078, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yjuto")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-500, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
