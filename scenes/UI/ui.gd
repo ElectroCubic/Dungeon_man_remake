@@ -16,9 +16,13 @@ func update_battery_bar():
 func update_coins():
 	coin_counter.text = str(Global.coins)
 
+func update_fright_bar():
+	player.fright_bar.value = Global.fright_level
+
 func update_stats():
 	update_battery_bar()
 	update_coins()
+	update_fright_bar()
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("Show_Radar"):

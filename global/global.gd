@@ -12,5 +12,12 @@ var battery_level_sec: float = 0:
 		battery_level_sec = value
 		stat_change.emit()
 
+var fright_level: float = 0:
+	set(value):
+		fright_level = value
+		stat_change.emit()
+		#print("emitting")
+
 var fright_mode: bool = false
+
 

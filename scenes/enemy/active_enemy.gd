@@ -2,18 +2,18 @@ extends Enemy
 
 class_name ActiveEnemy
 
-@onready var tile_map: TileMap = get_node("../../TileMap")
-@onready var player: Player = get_node("../../Player")
+@onready var tile_map = get_node("../../TileMap") as TileMap
+@onready var player = get_node("../../Player") as Player
 @export var enemy_speed: int = 20
 @export var chase_timer: float = 3
 var radar_icon: String = "ActiveEnemy"
 var spawn_pos: Vector2
 
 func _ready() -> void:
-	spawn_pos = position
 	$ChaseTimer.wait_time = chase_timer
 	is_moving = true
 	speed = enemy_speed
+	spawn_pos = position
 
 func _on_body_entered(body) -> void:
 	if body.name == "Player":
@@ -39,12 +39,12 @@ func move_enemy(delta: float) -> void:
 
 func get_path_to_pos(pos: Vector2) -> void:
 	current_path = tile_map.astar.get_id_path(
-		get_current_tile(),
+		get_current_tile(global_position),
 		tile_map.local_to_map(pos)
 	).slice(1)
 	
-func get_current_tile() -> Vector2i:
-	return tile_map.local_to_map(global_position)
+func get_current_tile(pos: Vector2) -> Vector2i:
+	return tile_map.local_to_map(pos)
 
 func _on_chase_timer_timeout():
 	current_path.clear()			# Retarget

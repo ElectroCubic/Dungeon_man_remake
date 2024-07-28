@@ -20,15 +20,20 @@ func _ready():
 
 func _physics_process(delta):
 	set_ray_dir()
-	if not Global.fright_mode:
-		check_player_presence()
+	check_player_presence()
 	move_enemy(delta)
 
 func set_ray_dir():
-	if forward:
-		ray_cast_2d.rotation_degrees = path_follow.rotation_degrees
+	if not Global.fright_mode:
+		if forward:
+			ray_cast_2d.rotation_degrees = path_follow.rotation_degrees
+		else:
+			ray_cast_2d.rotation_degrees = path_follow.rotation_degrees - 180
 	else:
-		ray_cast_2d.rotation_degrees = path_follow.rotation_degrees - 180
+		if forward:
+			ray_cast_2d.rotation_degrees = path_follow.rotation_degrees - 180
+		else:
+			ray_cast_2d.rotation_degrees = path_follow.rotation_degrees
 
 	ray_cast_2d.force_update_transform()
 	ray_cast_2d.force_raycast_update()

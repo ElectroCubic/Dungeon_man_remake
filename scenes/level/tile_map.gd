@@ -3,7 +3,8 @@ extends TileMap
 var astar: AStarGrid2D = AStarGrid2D.new()
 
 func _ready() -> void:
-	var map_rect: Rect2i = Rect2i(get_used_rect().position,get_used_rect().size)
+	var tile_map_pos := get_used_rect().position
+	var map_rect: Rect2i = Rect2i(tile_map_pos,get_used_rect().size)
 	
 	astar.region = map_rect
 	astar.cell_size = get_tileset().tile_size
@@ -12,8 +13,8 @@ func _ready() -> void:
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.update()
 	
-	var x_range = range(get_used_rect().position.x, get_used_rect().end.x)
-	var y_range = range(get_used_rect().position.y, get_used_rect().end.y)
+	var x_range = range(tile_map_pos.x, get_used_rect().end.x)
+	var y_range = range(tile_map_pos.y, get_used_rect().end.y)
 	
 	for i in x_range:
 		for j in y_range:

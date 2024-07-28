@@ -13,6 +13,7 @@ signal battery_died
 @onready var tile_map = get_node("../TileMap") as TileMap
 @onready var anim = $AnimatedSprite2D
 @onready var point_light_2d = $PointLight2D
+@onready var fright_bar = $FrightLevel/FrightBar
 
 var target_pos: Vector2
 var is_moving: bool = false
@@ -21,7 +22,9 @@ var is_move_key_pressed: bool = false
 var direction: Vector2 = Vector2.DOWN
 
 func _ready():
+	fright_bar.hide()
 	$FrightTimer.wait_time = fright_time
+	fright_bar.max_value = fright_time
 	point_light_2d.energy = initial_light_energy_lvl
 	Global.battery_level_sec = initial_light_energy_lvl * 60
 
@@ -52,6 +55,8 @@ func check_battery_level(delta: float):
 			Global.fright_mode = true
 			$FrightTimer.start()
 			point_light_2d.color = Color.BLUE_VIOLET
+			
+		Global.fright_level = $FrightTimer.time_left
 		
 	elif Global.battery_level_sec > 0:
 		Global.battery_level_sec -= delta

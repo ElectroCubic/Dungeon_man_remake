@@ -313,8 +313,8 @@ script = ExtResource("1_rwwk5")
 [node name="BG" type="ColorRect" parent="."]
 offset_left = -1528.0
 offset_top = -792.0
-offset_right = 360.0
-offset_bottom = 552.0
+offset_right = 1304.0
+offset_bottom = 776.0
 color = Color(0, 0, 0, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -347,7 +347,7 @@ position = Vector2(-472, -104)
 position = Vector2(-376, -248)
 
 [node name="Coin7" parent="Pickups" instance=ExtResource("4_3n2bt")]
-position = Vector2(-776, -200)
+position = Vector2(-648, 104)
 
 [node name="Coin8" parent="Pickups" instance=ExtResource("4_3n2bt")]
 position = Vector2(-72, -216)
@@ -356,29 +356,23 @@ position = Vector2(-72, -216)
 position = Vector2(-104, 280)
 
 [node name="Coin10" parent="Pickups" instance=ExtResource("4_3n2bt")]
-position = Vector2(-264, 184)
+position = Vector2(-104, 200)
 
 [node name="BatterySpawner" parent="." instance=ExtResource("9_kb13v")]
 
 [node name="Spawn1" type="Marker2D" parent="BatterySpawner"]
-position = Vector2(-808, 24)
+position = Vector2(-24, -24)
 
 [node name="Spawn2" type="Marker2D" parent="BatterySpawner"]
-position = Vector2(-776, 56)
+position = Vector2(-232, -24)
 
 [node name="Spawn3" type="Marker2D" parent="BatterySpawner"]
-position = Vector2(-744, 24)
+position = Vector2(-120, 88)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="ActiveEnemy" parent="Enemies" instance=ExtResource("4_pr0s6")]
-position = Vector2(-376, -472)
-
-[node name="ActiveEnemy2" parent="Enemies" instance=ExtResource("4_pr0s6")]
-position = Vector2(-952, -40)
-
-[node name="ActiveEnemy3" parent="Enemies" instance=ExtResource("4_pr0s6")]
-position = Vector2(136, -104)
+position = Vector2(-776, -216)
 
 [node name="PassiveEnemy3" parent="Enemies" instance=ExtResource("5_jtpsl")]
 
