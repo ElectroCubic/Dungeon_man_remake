@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2aqlixh4w5g"]
+
+[ext_resource type="Script" path="res://scenes/level/teleporter.gd" id="1_k12tn"]
+[ext_resource type="Texture2D" uid="uid://o1flsxohde01" path="res://graphics/tileset/tileset_gray.png" id="1_ygf4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0nkj"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_led4h"]
+atlas = ExtResource("1_ygf4m")
+region = Rect2(48, 32, 16, 16)
+filter_clip = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7v8j0"]
+radius = 16.0
+
+[node name="Teleporter" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+input_pickable = false
+script = ExtResource("1_k12tn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t0nkj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_led4h")
+flip_h = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-16, 0)
+
+[node name="PlayerNear" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerNear"]
+shape = SubResource("CircleShape2D_7v8j0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="PlayerNear" to="." method="_on_player_near_body_entered"]

@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Door
+
 @onready var bg_tile_map = get_node("../../BgTileMap") as TileMap
 @onready var interaction_manager = $InteractionManager
 @onready var animated_sprite_2d = $AnimatedSprite2D
@@ -18,5 +20,6 @@ func _on_body_entered(body):
 		if Global.coins >= coins_to_open:
 			is_closed = false
 			animated_sprite_2d.play("open_door")
+			await animated_sprite_2d.animation_finished
 			$LightOccluder2D.hide()
 			bg_tile_map.remove_barrier(global_position)

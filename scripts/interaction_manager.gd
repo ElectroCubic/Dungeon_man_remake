@@ -13,6 +13,7 @@ func update_label_text(text: String) -> void:
 
 func _ready() -> void:
 	update_label_text(interact_text)
+	label.position.y -= label_y_offset
 	label.hide()
 
 func _on_interaction_area_body_entered(_body) -> void:

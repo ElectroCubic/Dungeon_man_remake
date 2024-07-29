@@ -67,6 +67,7 @@ func check_battery_level(delta: float):
 
 func _process(delta: float) -> void:
 	check_battery_level(delta)
+	#print(is_moving)
 	
 	if is_controlled and not is_moving:
 		player_input()

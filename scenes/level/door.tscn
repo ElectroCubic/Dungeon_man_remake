@@ -55,7 +55,7 @@ polygon = PackedVector2Array(-8, -5, 8, -5, 8, -3, 7, -3, 7, -4, 6, -4, 6, -5, -
 script = ExtResource("1_ktcvh")
 
 [node name="InteractionManager" parent="." instance=ExtResource("1_fkcta")]
-label_y_offset = 0
+label_y_offset = 16
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3syat")

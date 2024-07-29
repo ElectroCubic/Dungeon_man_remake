@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://utmhpno60vjy"]
+[gd_scene load_steps=63 format=3 uid="uid://utmhpno60vjy"]
 
 [ext_resource type="Texture2D" uid="uid://o1flsxohde01" path="res://graphics/tileset/tileset_gray.png" id="1_fwjkh"]
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_rwwk5"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://di6q65d8ix2l6" path="res://scenes/pickups/coin.tscn" id="6_b1a3h"]
 [ext_resource type="PackedScene" uid="uid://dov87pvbef07v" path="res://scenes/pickups/battery_spawner.tscn" id="9_kb13v"]
 [ext_resource type="PackedScene" uid="uid://b80r1oa4nqjxt" path="res://scenes/level/door.tscn" id="10_kyn13"]
+[ext_resource type="PackedScene" uid="uid://c2aqlixh4w5g" path="res://scenes/level/teleporter.tscn" id="12_2yfid"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_eri4i"]
 tile_data = PackedInt32Array(0, 0, 1, 65536, 0, 1, 131072, 0, 3, 196608, 0, 4, 1, 65536, 1, 65537, 65536, 1, 131073, 65536, 1, 196609, 262144, 3, 2, 589824, 1, 65538, 196608, 1, 131074, 65536, 1, 196610, 327680, 3, 262146, 0, 3, 65539, 262144, 1, 131075, 65536, 1, 196611, 65536, 1, 262147, 65536, 1, 65540, 196608, 0, 131076, 589824, 1, 196612, 589824, 1, 262148, 589824, 1)
@@ -314,6 +315,7 @@ point_count = 5
 script = ExtResource("1_rwwk5")
 
 [node name="BG" type="ColorRect" parent="."]
+visible = false
 offset_left = -1528.0
 offset_top = -792.0
 offset_right = 1304.0
@@ -338,9 +340,6 @@ tile_set = ExtResource("2_wxxp2")
 format = 2
 layer_0/tile_data = PackedInt32Array(-1048599, 65536, 0, -1048601, 65536, 0)
 
-[node name="Player" parent="." instance=ExtResource("2_8gio2")]
-position = Vector2(-376, -216)
-
 [node name="Pickups" type="Node2D" parent="."]
 
 [node name="Coin" parent="Pickups" instance=ExtResource("6_b1a3h")]
@@ -353,7 +352,7 @@ position = Vector2(-552, -248)
 position = Vector2(-376, -152)
 
 [node name="Coin4" parent="Pickups" instance=ExtResource("6_b1a3h")]
-position = Vector2(-376, -328)
+position = Vector2(-376, -296)
 
 [node name="BatterySpawner" parent="." instance=ExtResource("9_kb13v")]
 
@@ -366,15 +365,16 @@ position = Vector2(-232, -24)
 [node name="Spawn3" type="Marker2D" parent="BatterySpawner"]
 position = Vector2(-120, 88)
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Teleporters" type="Node2D" parent="."]
 
-[node name="ActiveEnemy" parent="Enemies" instance=ExtResource("4_pr0s6")]
-position = Vector2(-776, -216)
+[node name="Teleporter" parent="Teleporters" node_paths=PackedStringArray("exit") instance=ExtResource("12_2yfid")]
+position = Vector2(-376, -104)
+exit = NodePath("../Teleporter2")
+exit_dir = "Down"
 
-[node name="PassiveEnemy3" parent="Enemies" instance=ExtResource("5_jtpsl")]
-
-[node name="Path2D" type="Path2D" parent="Enemies/PassiveEnemy3"]
-curve = SubResource("Curve2D_bik2t")
+[node name="Teleporter2" parent="Teleporters" node_paths=PackedStringArray("exit") instance=ExtResource("12_2yfid")]
+position = Vector2(-472, -104)
+exit = NodePath("../Teleporter")
 
 [node name="Doors" type="Node2D" parent="."]
 
@@ -382,7 +382,21 @@ curve = SubResource("Curve2D_bik2t")
 position = Vector2(-376, -264)
 coins_to_open = 3
 
+[node name="Player" parent="." instance=ExtResource("2_8gio2")]
+position = Vector2(-184, -248)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="PassiveEnemy3" parent="Enemies" instance=ExtResource("5_jtpsl")]
+
+[node name="Path2D" type="Path2D" parent="Enemies/PassiveEnemy3"]
+curve = SubResource("Curve2D_bik2t")
+
+[node name="ActiveEnemy" parent="Enemies" instance=ExtResource("4_pr0s6")]
+position = Vector2(-312, -248)
+
 [node name="DarkLighting" type="DirectionalLight2D" parent="."]
+visible = false
 blend_mode = 1
 
 [node name="UI" parent="." instance=ExtResource("4_13anp")]
