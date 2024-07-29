@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var player = get_node("../Player") as Player
 @onready var battery_bar = $BatteryLevel/BatteryBar
 @onready var coin_counter = $CoinDisplay/CoinCounter
+@onready var total_coins: int = get_node("../Pickups").get_child_count()
 
 func _ready():
 	Global.connect("stat_change", update_stats)
@@ -14,7 +15,7 @@ func update_battery_bar():
 	battery_bar.value = Global.battery_level_sec
 	
 func update_coins():
-	coin_counter.text = str(Global.coins)
+	coin_counter.text = str(Global.coins) + " / " + str(total_coins)
 
 func update_fright_bar():
 	player.fright_bar.value = Global.fright_level

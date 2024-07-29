@@ -16,7 +16,6 @@ var fright_level: float = 0:
 	set(value):
 		fright_level = value
 		stat_change.emit()
-		#print("emitting")
 
 var fright_mode: bool = false
 

@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://b80r1oa4nqjxt"]
+
+[ext_resource type="PackedScene" uid="uid://c0w5vpdgrrnh3" path="res://scenes/level/interaction_manager.tscn" id="1_fkcta"]
+[ext_resource type="Script" path="res://scenes/level/door.gd" id="1_ktcvh"]
+[ext_resource type="Texture2D" uid="uid://o1flsxohde01" path="res://graphics/tileset/tileset_gray.png" id="2_3fpgv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsban"]
+atlas = ExtResource("2_3fpgv")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skuy1"]
+atlas = ExtResource("2_3fpgv")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1erx"]
+atlas = ExtResource("2_3fpgv")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0xlp"]
+atlas = ExtResource("2_3fpgv")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3syat"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsban")
+}],
+"loop": false,
+"name": &"closed_door",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skuy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1erx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0xlp")
+}],
+"loop": false,
+"name": &"open_door",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8h55v"]
+radius = 12.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_to647"]
+polygon = PackedVector2Array(-8, -5, 8, -5, 8, -3, 7, -3, 7, -4, 6, -4, 6, -5, -6, -5, -6, -4, -7, -4, -7, -3, -8, -3)
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_ktcvh")
+
+[node name="InteractionManager" parent="." instance=ExtResource("1_fkcta")]
+label_y_offset = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3syat")
+animation = &"closed_door"
+autoplay = "closed_door"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8h55v")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_to647")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="InteractionManager" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="." to="InteractionManager" method="_on_interaction_area_body_exited"]

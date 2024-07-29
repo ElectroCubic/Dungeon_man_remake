@@ -11,6 +11,7 @@ signal battery_died
 @export var max_battery_time_sec: float = 180
 @export var initial_light_energy_lvl: float = 3
 @onready var tile_map = get_node("../TileMap") as TileMap
+@onready var bg_tile_map = $"../BgTileMap" as TileMap
 @onready var anim = $AnimatedSprite2D
 @onready var point_light_2d = $PointLight2D
 @onready var fright_bar = $FrightLevel/FrightBar
@@ -90,8 +91,6 @@ func player_input() -> void:
 	animate_player()
 
 func get_target_pos(dir: Vector2i) -> void:
-	is_moving = true
-	is_move_key_pressed = true
 	direction = dir
 
 	var current_tile: Vector2i = tile_map.local_to_map(global_position)
@@ -102,7 +101,16 @@ func get_target_pos(dir: Vector2i) -> void:
 	var tile_data := tile_map.get_cell_tile_data(0,target_tile)
 	
 	if tile_data and not tile_data.get_custom_data("Collidable"):
+		is_moving = true
+		is_move_key_pressed = true
 		target_pos = tile_map.map_to_local(target_tile)
+	else:
+		var bg_tile_data := bg_tile_map.get_cell_tile_data(0,target_tile)
+		
+		if bg_tile_data and not bg_tile_data.get_custom_data("Collidable"):
+			is_moving = true
+			is_move_key_pressed = true
+			target_pos = tile_map.map_to_local(target_tile)
 
 func move_player(delta: float) -> void:
 	global_position = global_position.move_toward(target_pos, MAX_SPEED * delta)
