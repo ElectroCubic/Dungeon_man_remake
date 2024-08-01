@@ -5,7 +5,7 @@ class_name ActiveEnemy
 @onready var tile_map = get_node("../../TileMap") as TileMap
 @onready var player = get_node("../../Player") as Player
 @onready var teleporters = get_node("../../Teleporters").get_children()
-@export var enemy_speed: int = 20
+@export var enemy_speed: int = 48
 @export var chase_timer: float = 5
 var radar_icon: String = "ActiveEnemy"
 var spawn_pos: Vector2
@@ -27,7 +27,7 @@ func player_near_teleport(pos: Vector2):
 		$TeleportTimer.start()
 		
 func _on_body_entered(body) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and not Global.fright_mode:
 		player_hit.emit()
 	
 func _process(delta: float) -> void:

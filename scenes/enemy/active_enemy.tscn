@@ -10,7 +10,6 @@ collision_layer = 2
 collision_mask = 17
 input_pickable = false
 script = ExtResource("1_kfwt0")
-enemy_speed = 45
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color(0.517647, 0, 0, 1)

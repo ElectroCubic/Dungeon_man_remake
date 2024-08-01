@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://di6q65d8ix2l6"]
+[gd_scene load_steps=32 format=3 uid="uid://di6q65d8ix2l6"]
 
 [ext_resource type="Texture2D" uid="uid://c8omdry4sbhrj" path="res://graphics/pickups/CoinSpin.png" id="1_fx4fe"]
 [ext_resource type="Script" path="res://scenes/pickups/coin.gd" id="1_yflmy"]
+[ext_resource type="Texture2D" uid="uid://bc7p8mcjx5hyk" path="res://graphics/pickups/Twinkle_White.png" id="3_7m5da"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydorm"]
 atlas = ExtResource("1_fx4fe")
@@ -95,11 +96,101 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e8bjy"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alvo4"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia107"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p2da"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plgky"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seokm"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfv8o"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvrn0"]
+atlas = ExtResource("3_7m5da")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1krwe"]
+animations = [{
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_alvo4")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_ia107")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_7p2da")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_plgky")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_seokm")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_lfv8o")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_jvrn0")
+}, {
+"duration": 25.0,
+"texture": null
+}],
+"loop": true,
+"name": &"Twinkle",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ao1od"]
 radius = 5.0
 
+[sub_resource type="Curve" id="Curve_ygjmy"]
+_data = [Vector2(0.506944, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.87606, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ucglq"]
+curve = SubResource("Curve_ygjmy")
+
+[sub_resource type="Gradient" id="Gradient_mf8o1"]
+offsets = PackedFloat32Array(0, 0.596154, 1)
+colors = PackedColorArray(1, 0.784314, 0.133333, 1, 1, 0.851508, 0.403333, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ms8y0"]
+gradient = SubResource("Gradient_mf8o1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_87y5x"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 52.975
+initial_velocity_min = 14.0
+initial_velocity_max = 22.0
+angular_velocity_min = 18.23
+angular_velocity_max = 109.37
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.2
+color_ramp = SubResource("GradientTexture1D_ms8y0")
+alpha_curve = SubResource("CurveTexture_ucglq")
+
 [node name="Coin" type="Area2D"]
-texture_filter = 1
 collision_layer = 4
 input_pickable = false
 script = ExtResource("1_yflmy")
@@ -110,7 +201,26 @@ sprite_frames = SubResource("SpriteFrames_0e2pr")
 animation = &"Spin"
 autoplay = "Spin"
 
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
+light_mask = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_e8bjy")
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_1krwe")
+animation = &"Twinkle"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ao1od")
+
+[node name="ShiningParticles" type="GPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(0, 4)
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_87y5x")
+lifetime = 0.4
+one_shot = true
+randomness = 0.12
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

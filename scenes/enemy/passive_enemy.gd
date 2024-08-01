@@ -4,7 +4,7 @@ class_name PassiveEnemy
 
 @onready var ray_cast_2d = $RayCast2D
 @onready var player: Player = get_node("../../Player")
-@export var enemy_speed: int = 35
+@export var enemy_speed: int = 48
 @export var offset: int = 0
 @export var forward: bool = true
 var path: Path2D
@@ -51,5 +51,5 @@ func move_enemy(delta: float) -> void:
 	position = path_follow.position
 	
 func _on_body_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and not Global.fright_mode:
 		player_hit.emit()

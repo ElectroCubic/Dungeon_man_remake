@@ -35,6 +35,7 @@ func set_exit_pos():
 
 func _on_body_entered(body):
 	body.is_moving = false
+	body.direction = exit.exit_direction
 	body.global_position = exit.exit_pos
 
 func _on_area_entered(area):
@@ -47,4 +48,3 @@ func _on_area_entered(area):
 func _on_player_near_body_entered(body):
 	if body.name == "Player":
 		player_near.emit(global_position)
-		print("Player near")
