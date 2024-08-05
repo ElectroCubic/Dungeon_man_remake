@@ -5,6 +5,7 @@ extends TileMap
 
 var astar: AStarGrid2D = AStarGrid2D.new()
 var coin_spawns: Array[Vector2i]
+var coin_spawns_locations: Array[Vector2i]
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -32,6 +33,8 @@ func _ready() -> void:
 				
 			elif tile_atlas_pos == Vector2i(1,1):
 				coin_spawns.append(coords)
+	
+	
 	
 	for i in range(coins_to_spawn):
 		spawn_coin()

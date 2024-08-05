@@ -6,10 +6,12 @@ signal fright_mode_activated
 signal fright_mode_deactivated
 signal battery_died
 
-@export var MAX_SPEED: int = 70
+@export var MAX_SPEED: int = 80
 @export var fright_time: int = 10
 @export var max_battery_time_sec: float = 180
 @export var initial_light_energy_lvl: float = 3
+@export var min_light_radius: float = 0.18
+@export var max_light_radius: float = 0.25
 @onready var tile_map = get_node("../TileMap") as TileMap
 @onready var bg_tile_map = $"../BgTileMap" as TileMap
 @onready var anim = $AnimatedSprite2D
@@ -22,12 +24,19 @@ var is_controlled: bool = true
 var is_move_key_pressed: bool = false
 var direction: Vector2 = Vector2.DOWN
 
+var scale_down_threshold_time: int = 60
+var total_time_range: float
+var scaled_down_range: float
+
 func _ready():
+	total_time_range = max_battery_time_sec - scale_down_threshold_time
+	scaled_down_range = max_light_radius - min_light_radius
 	fright_bar.hide()
 	$FrightTimer.wait_time = fright_time
 	fright_bar.max_value = fright_time
 	point_light_2d.energy = initial_light_energy_lvl
-	Global.battery_level_sec = initial_light_energy_lvl * 60
+	point_light_2d.texture_scale = max_light_radius
+	Global.battery_level_sec = max_battery_time_sec
 
 func animate_player():
 	if is_move_key_pressed:
@@ -61,7 +70,23 @@ func check_battery_level(delta: float):
 		
 	elif Global.battery_level_sec > 0:
 		Global.battery_level_sec -= delta
-		point_light_2d.energy = float(Global.battery_level_sec) / 60
+
+		if Global.battery_level_sec > 30:
+			point_light_2d.energy = float(Global.battery_level_sec) / 60
+		
+		if Global.battery_level_sec > scale_down_threshold_time:
+			point_light_2d.texture_scale = (((float(Global.battery_level_sec) - scale_down_threshold_time) * scaled_down_range) / total_time_range) + min_light_radius
+			
+			#OldRange = (OldMax - OldMin)  
+			#NewRange = (NewMax - NewMin)  
+			#NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+			
+			#old_range = 180 - 60 = 120
+			#new_range = 0.25 - 0.18 = 0.07
+			#new_value = (((180 - 60) * 0.07) / 120) + 0.18
+			
+			print(point_light_2d.texture_scale)
+
 	else:
 		battery_died.emit()
 

@@ -6,18 +6,19 @@ class_name ActiveEnemy
 @onready var player = get_node("../../Player") as Player
 @onready var teleporters = get_node("../../Teleporters").get_children()
 @export var enemy_speed: int = 48
-@export var chase_timer: float = 5
 var radar_icon: String = "ActiveEnemy"
 var spawn_pos: Vector2
+var random_pos: Vector2
 var can_teleport: bool = true
+var can_chase: bool = false
 
 func _ready() -> void:
-	for t in teleporters:
-		t.connect("player_near", player_near_teleport)
-
-	$ChaseTimer.wait_time = chase_timer
 	speed = enemy_speed
 	spawn_pos = position
+	get_random_pos()
+	
+	for t in teleporters:
+		t.connect("player_near", player_near_teleport)
 
 func player_near_teleport(pos: Vector2):
 	if not Global.fright_mode and can_teleport:
@@ -25,18 +26,22 @@ func player_near_teleport(pos: Vector2):
 		get_path_to_pos(pos)
 		can_teleport = false
 		$TeleportTimer.start()
-		
+
 func _on_body_entered(body) -> void:
 	if body.name == "Player" and not Global.fright_mode:
 		player_hit.emit()
-	
+
 func _process(delta: float) -> void:
 	if not is_moving:
 		return
 	
 	if current_path.is_empty():
-		if not Global.fright_mode:
+		if not Global.fright_mode and can_chase:
 			get_path_to_pos(player.position)
+		elif not Global.fright_mode and not can_chase:
+			get_random_pos()
+			#print(random_pos)
+			get_path_to_pos(random_pos)
 		else:
 			get_path_to_pos(spawn_pos)
 	elif is_moving:
@@ -50,6 +55,9 @@ func move_enemy(delta: float) -> void:
 		current_path.pop_front()
 		changed_pos.emit()
 
+func get_random_pos():
+	random_pos = tile_map.map_to_local(tile_map.coin_spawns.pick_random())
+
 func get_path_to_pos(pos: Vector2) -> void:
 	current_path = tile_map.astar.get_id_path(
 		get_current_tile(global_position),
@@ -59,8 +67,14 @@ func get_path_to_pos(pos: Vector2) -> void:
 func get_current_tile(pos: Vector2) -> Vector2i:
 	return tile_map.local_to_map(pos)
 
-func _on_chase_timer_timeout():
-	current_path.clear()			# Retarget
-
 func _on_teleport_timer_timeout():
 	can_teleport = true
+
+func _on_detection_zone_body_entered(body):
+	if body.name == "Player":
+		can_chase = true
+		current_path.clear()
+
+func _on_detection_zone_body_exited(body):
+	if body.name == "Player":
+		can_chase = false

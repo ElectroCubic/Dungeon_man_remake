@@ -392,6 +392,8 @@ format = 2
 layer_0/tile_data = PackedInt32Array(2490325, 393216, 0, 2490327, 131072, 0, 2424876, 393216, 0, 2424874, 327680, 0, -1703977, 327680, 0, -1703979, 393216, 0, -1769430, 131072, 0, -1769428, 393216, 0)
 metadata/_edit_lock_ = true
 
+[node name="Zones" type="Node2D" parent="."]
+
 [node name="Pickups" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
