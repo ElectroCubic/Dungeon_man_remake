@@ -84,8 +84,6 @@ func check_battery_level(delta: float):
 			#old_range = 180 - 60 = 120
 			#new_range = 0.25 - 0.18 = 0.07
 			#new_value = (((180 - 60) * 0.07) / 120) + 0.18
-			
-			print(point_light_2d.texture_scale)
 
 	else:
 		battery_died.emit()

@@ -2,10 +2,11 @@ extends Enemy
 
 class_name ActiveEnemy
 
+@onready var anim = $AnimatedSprite2D
 @onready var tile_map = get_node("../../TileMap") as TileMap
 @onready var player = get_node("../../Player") as Player
 @onready var teleporters = get_node("../../Teleporters").get_children()
-@export var enemy_speed: int = 48
+@export var enemy_speed: int = 32
 var radar_icon: String = "ActiveEnemy"
 var spawn_pos: Vector2
 var random_pos: Vector2
@@ -19,6 +20,9 @@ func _ready() -> void:
 	
 	for t in teleporters:
 		t.connect("player_near", player_near_teleport)
+
+func animate():
+	pass
 
 func player_near_teleport(pos: Vector2):
 	if not Global.fright_mode and can_teleport:
@@ -40,7 +44,6 @@ func _process(delta: float) -> void:
 			get_path_to_pos(player.position)
 		elif not Global.fright_mode and not can_chase:
 			get_random_pos()
-			#print(random_pos)
 			get_path_to_pos(random_pos)
 		else:
 			get_path_to_pos(spawn_pos)

@@ -40,5 +40,6 @@ func get_current_tile(pos: Vector2) -> Vector2i:
 	return tile_map.local_to_map(pos)
 
 func player_death():
-	print("Game Over!")
+	#print("Game Over!")
 	#get_tree().quit()
+	pass

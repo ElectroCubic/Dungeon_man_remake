@@ -4,7 +4,7 @@ class_name PassiveEnemy
 
 @onready var ray_cast_2d = $RayCast2D
 @onready var player: Player = get_node("../../Player")
-@export var enemy_speed: int = 48
+@export var enemy_speed: int = 32
 @export var offset: int = 0
 @export var forward: bool = true
 var path: Path2D

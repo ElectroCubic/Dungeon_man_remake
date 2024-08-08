@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvdxm4bogsqkx"
-path="res://.godot/imported/enemy1_WTFgamejam.png-8ecfa4a16038ec445389ccdfd6b05638.ctex"
+uid="uid://dilg8qcxxp3m2"
+path="res://.godot/imported/active_enemy.png-14ad04ff6fbd06630648745bc51f7432.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/enemies/enemy1_WTFgamejam.png"
-dest_files=["res://.godot/imported/enemy1_WTFgamejam.png-8ecfa4a16038ec445389ccdfd6b05638.ctex"]
+source_file="res://graphics/enemies/active_enemy.png"
+dest_files=["res://.godot/imported/active_enemy.png-14ad04ff6fbd06630648745bc51f7432.ctex"]
 
 [params]
 
