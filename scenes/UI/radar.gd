@@ -46,6 +46,12 @@ func update_radar_pos():
 		entity_pos.x = clamp(entity_pos.x,0,grid.size.x)
 		entity_pos.y = clamp(entity_pos.y,0,grid.size.y)
 		markers[entity].position = entity_pos
+		
+		if entity is Pickup:
+			if entity_pos.x == 0 or entity_pos.x == grid.size.x or entity_pos.y == 0 or entity_pos.y == grid.size.y:
+				markers[entity].scale = Vector2(0.55,0.55)
+			else:
+				markers[entity].scale = Vector2(0.45,0.45)
 
 func add_marker(item):
 	var new_marker = icons[item.radar_icon].duplicate()

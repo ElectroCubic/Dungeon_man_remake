@@ -88,7 +88,7 @@ texture = ExtResource("5_6kp62")
 
 [node name="PickupMarker" type="Sprite2D" parent="GridFrame/Grid"]
 visible = false
-modulate = Color(1, 0.54902, 1, 1)
+modulate = Color(1, 0.607843, 0, 1)
 light_mask = 2
 z_index = 1
 material = SubResource("CanvasItemMaterial_dehf6")

@@ -2,7 +2,7 @@ extends Enemy
 
 class_name ActiveEnemy
 
-@onready var anim = $AnimatedSprite2D
+@onready var anim := $AnimatedSprite2D
 @onready var tile_map = get_node("../../TileMap") as TileMap
 @onready var player = get_node("../../Player") as Player
 @onready var teleporters = get_node("../../Teleporters").get_children()
@@ -22,7 +22,18 @@ func _ready() -> void:
 		t.connect("player_near", player_near_teleport)
 
 func animate():
-	pass
+	direction = current_path.front() - get_current_tile(global_position)
+	
+	if direction == Vector2.LEFT:
+		anim.flip_h = true
+		anim.animation = "scared_right" if Global.fright_mode else "right"
+	elif direction == Vector2.RIGHT:
+		anim.flip_h = false
+		anim.animation = "scared_right" if Global.fright_mode else "right"
+	elif direction == Vector2.UP:
+		anim.animation = "scared_up" if Global.fright_mode else "up"
+	elif direction == Vector2.DOWN:
+		anim.animation = "scared_down" if Global.fright_mode else "down"
 
 func player_near_teleport(pos: Vector2):
 	if not Global.fright_mode and can_teleport:
@@ -37,6 +48,7 @@ func _on_body_entered(body) -> void:
 
 func _process(delta: float) -> void:
 	if not is_moving:
+		anim.animation = "scared_idle" if Global.fright_mode else "idle"
 		return
 	
 	if current_path.is_empty():
@@ -48,6 +60,7 @@ func _process(delta: float) -> void:
 		else:
 			get_path_to_pos(spawn_pos)
 	elif is_moving:
+		animate()
 		move_enemy(delta)
 
 func move_enemy(delta: float) -> void:

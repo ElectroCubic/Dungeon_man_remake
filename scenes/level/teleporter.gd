@@ -35,6 +35,7 @@ func set_exit_pos():
 
 func _on_body_entered(body):
 	body.is_moving = false
+	body.is_move_key_pressed = false
 	body.direction = exit.exit_direction
 	body.global_position = exit.exit_pos
 

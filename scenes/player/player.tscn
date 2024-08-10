@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dgwshghyn8tsc" path="res://graphics/player/AdventurerSprites.png" id="3_d7576"]
 [ext_resource type="Texture2D" uid="uid://chaujflx2mwyu" path="res://graphics/player/circle.png" id="3_r76w2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2owg"]
-size = Vector2(10, 10)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_0amlo"]
 atlas = ExtResource("3_d7576")
 region = Rect2(16, 112, 16, 16)
@@ -174,6 +171,9 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2owg"]
+size = Vector2(10, 10)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uc7yk"]
 light_mode = 1
 
@@ -196,14 +196,14 @@ collision_mask = 30
 motion_mode = 1
 script = ExtResource("1_e57op")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_f2owg")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.577008, 0.577008, 0.577008, 1)
 sprite_frames = SubResource("SpriteFrames_pmf4r")
 animation = &"Idle_Front"
 autoplay = "Idle_Front"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f2owg")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 3.0
