@@ -6,22 +6,18 @@ class_name ActiveEnemy
 @onready var tile_map = get_node("../../TileMap") as TileMap
 @onready var player = get_node("../../Player") as Player
 @onready var teleporters = get_node("../../Teleporters").get_children()
-@export var enemy_speed: int = 32
+@export var enemy_speed: int = 48
 var radar_icon: String = "ActiveEnemy"
-var spawn_pos: Vector2
-var random_pos: Vector2
 var can_teleport: bool = true
 var can_chase: bool = false
 
 func _ready() -> void:
 	speed = enemy_speed
-	spawn_pos = position
-	get_random_pos()
 	
 	for t in teleporters:
 		t.connect("player_near", player_near_teleport)
 
-func animate():
+func animate() -> void:
 	direction = current_path.front() - get_current_tile(global_position)
 	
 	if direction == Vector2.LEFT:
@@ -37,7 +33,6 @@ func animate():
 
 func player_near_teleport(pos: Vector2):
 	if not Global.fright_mode and can_teleport:
-		print(pos)
 		get_path_to_pos(pos)
 		can_teleport = false
 		$TeleportTimer.start()
@@ -54,11 +49,8 @@ func _process(delta: float) -> void:
 	if current_path.is_empty():
 		if not Global.fright_mode and can_chase:
 			get_path_to_pos(player.position)
-		elif not Global.fright_mode and not can_chase:
-			get_random_pos()
-			get_path_to_pos(random_pos)
 		else:
-			get_path_to_pos(spawn_pos)
+			get_path_to_pos(get_random_pos())
 	elif is_moving:
 		animate()
 		move_enemy(delta)
@@ -71,8 +63,8 @@ func move_enemy(delta: float) -> void:
 		current_path.pop_front()
 		changed_pos.emit()
 
-func get_random_pos():
-	random_pos = tile_map.map_to_local(tile_map.coin_spawns.pick_random())
+func get_random_pos() -> Vector2:
+	return tile_map.map_to_local(tile_map.coin_spawns.pick_random())
 
 func get_path_to_pos(pos: Vector2) -> void:
 	current_path = tile_map.astar.get_id_path(
@@ -83,14 +75,14 @@ func get_path_to_pos(pos: Vector2) -> void:
 func get_current_tile(pos: Vector2) -> Vector2i:
 	return tile_map.local_to_map(pos)
 
-func _on_teleport_timer_timeout():
+func _on_teleport_timer_timeout() -> void:
 	can_teleport = true
 
-func _on_detection_zone_body_entered(body):
+func _on_detection_zone_body_entered(body) -> void:
 	if body.name == "Player":
-		can_chase = true
 		current_path.clear()
+		can_chase = true
 
-func _on_detection_zone_body_exited(body):
+func _on_detection_zone_body_exited(body) -> void:
 	if body.name == "Player":
 		can_chase = false

@@ -14,9 +14,9 @@ signal battery_died
 @export var max_light_radius: float = 0.25
 @onready var tile_map = get_node("../TileMap") as TileMap
 @onready var bg_tile_map = $"../BgTileMap" as TileMap
-@onready var anim = $AnimatedSprite2D
-@onready var point_light_2d = $PointLight2D
-@onready var fright_bar = $FrightLevel/FrightBar
+@onready var anim := $AnimatedSprite2D
+@onready var point_light_2d := $PointLight2D
+@onready var fright_bar := $FrightLevel/FrightBar
 
 var target_pos: Vector2
 var is_moving: bool = false
@@ -28,7 +28,7 @@ var scale_down_threshold_time: int = 60
 var total_time_range: float
 var scaled_down_range: float
 
-func _ready():
+func _ready() -> void:
 	total_time_range = max_battery_time_sec - scale_down_threshold_time
 	scaled_down_range = max_light_radius - min_light_radius
 	fright_bar.hide()
@@ -38,25 +38,54 @@ func _ready():
 	point_light_2d.texture_scale = max_light_radius
 	Global.battery_level_sec = max_battery_time_sec
 
-func animate_player():
+func animate_player() -> void:
 	if is_move_key_pressed:
 		if direction == Vector2.LEFT:
-			anim.play("Left")
+			anim.flip_h = true
+			if Global.fright_mode:
+				anim.play("Powered_right")
+			else:
+				anim.play("Right")
+			
 		elif direction == Vector2.RIGHT:
-			anim.play("Right")
+			anim.flip_h = false
+			if Global.fright_mode:
+				anim.play("Powered_right")
+			else:
+				anim.play("Right")
+			
 		elif direction == Vector2.UP:
 			anim.play("Back")
+			
 		elif direction == Vector2.DOWN:
-			anim.play("Front")
+			if Global.fright_mode:
+				anim.play("Powered_front")
+			else:
+				anim.play("Front")
+			
 	else:
 		if direction == Vector2.LEFT:
-			anim.play("Idle_Left")
+			anim.flip_h = true
+			if Global.fright_mode:
+				anim.play("Powered_right_idle")
+			else:
+				anim.play("Idle_Right")
+			
 		elif direction == Vector2.RIGHT:
-			anim.play("Idle_Right")
+			anim.flip_h = false
+			if Global.fright_mode:
+				anim.play("Powered_right_idle")
+			else:
+				anim.play("Idle_Right")
+			
 		elif direction == Vector2.UP:
-			anim.play("Idle_Back")
+			anim.animation = "Idle_Back"
+			
 		elif direction == Vector2.DOWN:
-			anim.play("Idle_Front")
+			if Global.fright_mode:
+				anim.play("Powered_front_idle")
+			else:
+				anim.play("Idle_Front")
 
 func check_battery_level(delta: float):
 	if Global.battery_level_sec > max_battery_time_sec:
@@ -110,7 +139,7 @@ func player_input() -> void:
 		get_target_pos(Vector2i.UP)
 	elif Input.is_action_pressed("Down"):
 		get_target_pos(Vector2i.DOWN)
-
+		
 	animate_player()
 
 func get_target_pos(dir: Vector2i) -> void:
@@ -141,7 +170,7 @@ func move_player(delta: float) -> void:
 	if global_position == target_pos:
 		is_moving = false
 
-func _on_fright_timer_timeout():
+func _on_fright_timer_timeout() -> void:
 	fright_mode_deactivated.emit()
 	Global.fright_mode = false
 	Global.battery_level_sec = max_battery_time_sec

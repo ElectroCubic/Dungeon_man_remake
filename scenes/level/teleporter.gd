@@ -14,10 +14,10 @@ var exit_direction: Vector2
 			exit_dir = value
 			set_exit_pos()
 
-func _ready():
+func _ready() -> void:
 	exit_pos = $Marker2D.global_position
 
-func set_exit_pos():
+func set_exit_pos() -> void:
 	if exit_dir == "Left":
 		exit_direction = Vector2.LEFT
 		$Marker2D.position = Vector2(-16,0)
@@ -33,19 +33,19 @@ func set_exit_pos():
 		exit_direction = Vector2.DOWN
 		$Marker2D.position = Vector2(0,16)
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	body.is_moving = false
 	body.is_move_key_pressed = false
 	body.direction = exit.exit_direction
 	body.global_position = exit.exit_pos
 
-func _on_area_entered(area):
+func _on_area_entered(area) -> void:
 	if area is ActiveEnemy:
 		area.current_path.clear()
 		area.is_moving = false
 		area.global_position = exit.exit_pos
 		area.is_moving = true
 
-func _on_player_near_body_entered(body):
+func _on_player_near_body_entered(body) -> void:
 	if body.name == "Player":
 		player_near.emit(global_position)

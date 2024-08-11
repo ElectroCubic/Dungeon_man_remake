@@ -33,9 +33,7 @@ func _ready() -> void:
 				
 			elif tile_atlas_pos == Vector2i(1,1):
 				coin_spawns.append(coords)
-	
-	
-	
+
 	for i in range(coins_to_spawn):
 		spawn_coin()
 

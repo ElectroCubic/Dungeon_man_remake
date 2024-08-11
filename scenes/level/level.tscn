@@ -400,6 +400,7 @@ metadata/_edit_lock_ = true
 
 [node name="BatterySpawner" parent="." instance=ExtResource("9_kb13v")]
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Spawn1" type="Marker2D" parent="BatterySpawner"]
 position = Vector2(8, 520)
@@ -415,6 +416,7 @@ position = Vector2(8, -504)
 
 [node name="Teleporters" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Teleporter" parent="Teleporters" node_paths=PackedStringArray("exit") instance=ExtResource("7_aiyix")]
 position = Vector2(-664, 504)
@@ -437,6 +439,7 @@ exit_dir = "Down"
 
 [node name="Doors" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Door" parent="Doors" instance=ExtResource("8_vit38")]
 position = Vector2(-664, 600)
@@ -469,6 +472,7 @@ curve = SubResource("Curve2D_resry")
 
 [node name="Path2D" type="Path2D" parent="Enemies/PassiveEnemy2"]
 curve = SubResource("Curve2D_ow5lb")
+metadata/_edit_group_ = true
 
 [node name="PassiveEnemy3" parent="Enemies" instance=ExtResource("10_58wj5")]
 

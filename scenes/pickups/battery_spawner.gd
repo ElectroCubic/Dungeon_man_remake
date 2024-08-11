@@ -8,7 +8,7 @@ class_name Spawner
 var spawn_locations: Array[Vector2]
 var current_batteries: Dictionary
 
-func _ready():
+func _ready() -> void:
 	var spawn_count := get_child_count()
 	
 	if spawn_count != 0:
@@ -21,7 +21,7 @@ func _ready():
 	else:
 		push_warning("Can't Spawn Batteries!")
 
-func spawn_battery():
+func spawn_battery() -> void:
 	var battery_temp: Pickup = battery.instantiate()
 	battery_temp.position = get_available_locations().pick_random()
 	current_batteries[battery_temp] = battery_temp.position
@@ -44,7 +44,7 @@ func get_available_locations() -> Array[Vector2]:
 		
 		return locations
 
-func check_batteries(battery_ref: Pickup):
+func check_batteries(battery_ref: Pickup) -> void:
 	spawn_battery()
 	for batt in current_batteries.keys():
 		if batt == battery_ref:

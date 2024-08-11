@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0w5vpdgrrnh3"]
+[gd_scene load_steps=4 format=3 uid="uid://c0w5vpdgrrnh3"]
 
 [ext_resource type="Script" path="res://scripts/interaction_manager.gd" id="1_rxpwx"]
+[ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="2_be162"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gtxlu"]
 blend_mode = 1
@@ -17,6 +18,7 @@ offset_left = -8.0
 offset_right = 392.0
 offset_bottom = 64.0
 scale = Vector2(0.05, 0.05)
+theme_override_fonts/normal_font = ExtResource("2_be162")
 theme_override_font_sizes/normal_font_size = 100
 fit_content = true
 scroll_active = false

@@ -5,21 +5,21 @@ class_name PassiveEnemy
 @onready var anim := $AnimatedSprite2D
 @onready var ray_cast_2d := $RayCast2D
 @onready var player = get_node("../../Player") as Player
-@export var enemy_speed: int = 32
+@export var enemy_speed: int = 48
 @export var offset: int = 0
 @export var forward: bool = true
 var path: Path2D
 var path_follow: PathFollow2D
 var radar_icon: String = "PassiveEnemy"
 
-func _ready():
+func _ready() -> void:
 	speed = enemy_speed
 	path = get_children().back()
 	path_follow = PathFollow2D.new()
 	path.add_child(path_follow)
 	path_follow.progress = offset
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	set_ray_dir()
 	animate(ray_cast_2d.rotation_degrees)
 	check_player_presence()
@@ -48,7 +48,7 @@ func animate(ray_angle: float):
 			
 		anim.animation = "scared_vertical" if Global.fright_mode else "vertical"
 
-func set_ray_dir():
+func set_ray_dir() -> void:
 	if not Global.fright_mode:
 		if forward:
 			ray_cast_2d.rotation_degrees = path_follow.rotation_degrees
@@ -83,6 +83,6 @@ func move_enemy(delta: float) -> void:
 	path_follow.progress += enemy_speed * dir * delta
 	position = path_follow.position
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body.name == "Player" and not Global.fright_mode:
 		player_hit.emit()

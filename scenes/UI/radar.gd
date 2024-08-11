@@ -17,7 +17,7 @@ const radar_grid_box_size: Vector2 = Vector2(20,20)
 var markers: Dictionary = {}
 var grid_scale: Vector2
 
-func set_player_marker_rotation():
+func set_player_marker_rotation() -> void:
 	if player.direction == Vector2.LEFT:
 		player_marker.rotation_degrees = 270
 	elif player.direction == Vector2.RIGHT:
@@ -27,7 +27,7 @@ func set_player_marker_rotation():
 	elif player.direction == Vector2.DOWN:
 		player_marker.rotation_degrees = 180
 
-func _ready():
+func _ready() -> void:
 	grid.size = grid.custom_minimum_size
 	player_marker.position = grid.size / 2
 	set_player_marker_rotation()
@@ -40,7 +40,7 @@ func _ready():
 
 	update_radar_pos()
 
-func update_radar_pos():
+func update_radar_pos() -> void:
 	for entity in markers:
 		var entity_pos = ((entity.position - player.position) * grid_scale) + grid.size / 2
 		entity_pos.x = clamp(entity_pos.x,0,grid.size.x)
@@ -53,7 +53,7 @@ func update_radar_pos():
 			else:
 				markers[entity].scale = Vector2(0.45,0.45)
 
-func add_marker(item):
+func add_marker(item) -> void:
 	var new_marker = icons[item.radar_icon].duplicate()
 	grid.add_child(new_marker)
 	new_marker.show()
@@ -63,12 +63,12 @@ func add_marker(item):
 	else:
 		item.connect("item_picked",remove_marker)
 
-func remove_marker(item):
+func remove_marker(item) -> void:
 	if markers.has(item):
 		markers[item].queue_free()
 		markers.erase(item)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	scan_line.rotation_degrees += (360 / scan_time) * delta
 
 	if not player.is_moving:

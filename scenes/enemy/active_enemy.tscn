@@ -182,7 +182,6 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_77bk4")
 
 [node name="DetectionZone" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_64684")

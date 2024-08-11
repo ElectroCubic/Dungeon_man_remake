@@ -6,13 +6,12 @@ class_name Door
 @onready var interaction_manager = $InteractionManager
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @export var coins_to_open: int = 1
-
 var is_closed: bool = true
 
-func _ready():
+func _ready() -> void:
 	bg_tile_map.set_barrier(global_position)
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body.name == "Player" and is_closed:
 		var display_text = str(Global.coins) + " / " + str(coins_to_open)
 		interaction_manager.update_label_text(display_text)
