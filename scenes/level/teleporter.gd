@@ -34,8 +34,8 @@ func set_exit_pos() -> void:
 		$Marker2D.position = Vector2(0,16)
 
 func _on_body_entered(body) -> void:
-	body.is_moving = false
 	body.is_move_key_pressed = false
+	body.is_moving = false
 	body.direction = exit.exit_direction
 	body.global_position = exit.exit_pos
 

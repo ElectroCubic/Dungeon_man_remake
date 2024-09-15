@@ -3,7 +3,7 @@ extends Area2D
 class_name Enemy
 
 signal changed_pos
-signal player_hit
+signal player_hit(sig_name)
 
 var speed: int
 var direction: Vector2

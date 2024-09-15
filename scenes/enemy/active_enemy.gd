@@ -39,7 +39,7 @@ func player_near_teleport(pos: Vector2):
 
 func _on_body_entered(body) -> void:
 	if body.name == "Player" and not Global.fright_mode:
-		player_hit.emit()
+		player_hit.emit(self.player_hit.get_name())
 
 func _process(delta: float) -> void:
 	if not is_moving:

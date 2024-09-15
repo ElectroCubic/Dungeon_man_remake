@@ -17,6 +17,10 @@ var fright_level: float = 0:
 		fright_level = value
 		stat_change.emit()
 
+var lvlCount: int = 1:
+	set(value):
+		lvlCount = value
+		stat_change.emit()
+
 var fright_mode: bool = false
-
-
+var game_over: bool = false

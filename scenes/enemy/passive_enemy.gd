@@ -85,4 +85,4 @@ func move_enemy(delta: float) -> void:
 
 func _on_body_entered(body) -> void:
 	if body.name == "Player" and not Global.fright_mode:
-		player_hit.emit()
+		player_hit.emit(self.player_hit.get_name())

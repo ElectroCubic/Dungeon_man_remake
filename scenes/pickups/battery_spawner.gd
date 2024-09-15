@@ -4,7 +4,7 @@ class_name Spawner
 
 @onready var radar: Radar = get_node("../UI/Radar")
 @onready var battery := preload("res://scenes/pickups/battery_cell.tscn")
-@export var batteries_to_spawn: int = 3
+@export var batteries_to_spawn: int = 1
 var spawn_locations: Array[Vector2]
 var current_batteries: Dictionary
 

@@ -1,9 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cenyt36m1l2n7"]
+[gd_scene load_steps=12 format=3 uid="uid://cenyt36m1l2n7"]
 
 [ext_resource type="PackedScene" uid="uid://dccymvi3jqmpu" path="res://scenes/UI/radar.tscn" id="1_572hq"]
 [ext_resource type="Script" path="res://scenes/UI/ui.gd" id="1_xfng3"]
 [ext_resource type="Texture2D" uid="uid://c8omdry4sbhrj" path="res://graphics/pickups/CoinSpin.png" id="3_x2chr"]
 [ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="4_kwcy5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6nnhc"]
+font = ExtResource("4_kwcy5")
+font_size = 48
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 4)
 
 [sub_resource type="Gradient" id="Gradient_kv5sg"]
 offsets = PackedFloat32Array(0.630208)
@@ -30,6 +37,20 @@ shadow_size = 0
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_xfng3")
+
+[node name="LvlInfo" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 120.0
+offset_right = 102.0
+offset_bottom = 192.0
+grow_horizontal = 2
+text = "LEVEL 1"
+label_settings = SubResource("LabelSettings_6nnhc")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Radar" parent="." instance=ExtResource("1_572hq")]
 anchors_preset = 8

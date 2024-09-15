@@ -4,7 +4,7 @@ class_name Player
 
 signal fright_mode_activated
 signal fright_mode_deactivated
-signal battery_died
+signal battery_died(sig_name)
 
 @export var MAX_SPEED: int = 80
 @export var fright_time: int = 10
@@ -39,7 +39,7 @@ func _ready() -> void:
 	Global.battery_level_sec = max_battery_time_sec
 
 func animate_player() -> void:
-	if is_move_key_pressed:
+	if is_move_key_pressed and is_moving:
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:
@@ -115,7 +115,8 @@ func check_battery_level(delta: float):
 			#new_value = (((180 - 60) * 0.07) / 120) + 0.18
 
 	else:
-		battery_died.emit()
+		if not Global.game_over:
+			battery_died.emit(self.battery_died.get_name())
 
 func _process(delta: float) -> void:
 	check_battery_level(delta)
@@ -125,7 +126,7 @@ func _process(delta: float) -> void:
 
 	elif is_moving:
 		move_player(delta)
-	
+
 func player_input() -> void:
 	# Player Movement Controls
 	
@@ -175,3 +176,10 @@ func _on_fright_timer_timeout() -> void:
 	Global.fright_mode = false
 	Global.battery_level_sec = max_battery_time_sec
 	point_light_2d.color = Color.WHITE
+
+func player_pit_fall_anim() -> void:
+	var tween: Tween = create_tween().set_parallel(true)
+	tween.tween_property(self,"modulate:a",0,0.7)
+	tween.tween_property(self,"rotation_degrees",360,0.7)
+	tween.tween_property(self,"scale",Vector2(0,0),1.4)
+	await tween.finished

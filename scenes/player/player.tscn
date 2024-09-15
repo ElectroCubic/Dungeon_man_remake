@@ -16,6 +16,14 @@ region = Rect2(32, 64, 16, 16)
 atlas = ExtResource("3_d7576")
 region = Rect2(0, 64, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx8ms"]
+atlas = ExtResource("3_d7576")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ljmk"]
+atlas = ExtResource("3_d7576")
+region = Rect2(80, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6wg8"]
 atlas = ExtResource("3_d7576")
 region = Rect2(16, 16, 16, 16)
@@ -35,14 +43,6 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmqws"]
 atlas = ExtResource("3_d7576")
 region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jx8ms"]
-atlas = ExtResource("3_d7576")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1ljmk"]
-atlas = ExtResource("3_d7576")
-region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2c31"]
 atlas = ExtResource("3_d7576")
@@ -149,6 +149,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jx8ms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ljmk")
+}],
+"loop": true,
+"name": &"Crying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_l6wg8")
 }, {
 "duration": 1.0,
@@ -169,7 +180,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1ljmk")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -322,7 +333,7 @@ script = ExtResource("1_e57op")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.577008, 0.577008, 0.577008, 1)
 sprite_frames = SubResource("SpriteFrames_pmf4r")
-animation = &"Idle_Front"
+animation = &"Death"
 autoplay = "Idle_Front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

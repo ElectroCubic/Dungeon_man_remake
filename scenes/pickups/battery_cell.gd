@@ -20,10 +20,15 @@ func _ready() -> void:
 	
 func start_floating() -> void:
 	float_tween = get_tree().create_tween().set_loops()
+	float_tween.tween_callback(check_game_over)
 	float_tween.tween_property($Sprite2D, "position:y", -float_offset, float_duration).as_relative()
 	float_tween.tween_interval(float_interval)
 	float_tween.tween_property($Sprite2D, "position:y", float_offset, float_duration).as_relative()
 	float_tween.tween_interval(float_interval)
+	
+func check_game_over():
+	if Global.game_over:
+		stop_floating()
 
 func stop_floating() -> void:
 	float_tween.stop()

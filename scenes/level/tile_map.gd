@@ -6,7 +6,7 @@ extends TileMap
 var astar: AStarGrid2D = AStarGrid2D.new()
 var coin_spawns: Array[Vector2i]
 var coin_spawns_locations: Array[Vector2i]
-var rng = RandomNumberGenerator.new()
+var rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	var tile_map_pos := get_used_rect().position
@@ -37,7 +37,7 @@ func _ready() -> void:
 	for i in range(coins_to_spawn):
 		spawn_coin()
 
-func spawn_coin():
+func spawn_coin() -> void:
 	var coin: Coin = coin_scene.instantiate()
 	var random_index: int = rng.randi_range(0,coin_spawns.size() - 1)
 	coin.global_position = map_to_local(coin_spawns[random_index])
