@@ -1,11 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://e1rsk7bqeic2"]
+[gd_scene load_steps=4 format=3 uid="uid://e1rsk7bqeic2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_llr1m"]
+[ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="2_wx8ja"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c8do0"]
+font = ExtResource("2_wx8ja")
+font_size = 70
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(6, 4)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_llr1m")
 
 [node name="MainUI" type="CanvasLayer" parent="."]
+
+[node name="Bg" type="ColorRect" parent="MainUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TitleText" type="Label" parent="MainUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -468.0
+offset_top = 104.0
+offset_right = 468.0
+offset_bottom = 210.0
+grow_horizontal = 2
+text = "Drowning In the Dark"
+label_settings = SubResource("LabelSettings_c8do0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Play" type="Button" parent="MainUI"]
 anchors_preset = 8
@@ -14,11 +44,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -123.5
-offset_top = -137.5
+offset_top = -57.5
 offset_right = 123.5
-offset_bottom = -22.5
+offset_bottom = 57.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_wx8ja")
 theme_override_font_sizes/font_size = 40
 text = "PLAY"
 
@@ -29,11 +60,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -123.5
-offset_top = 5.5
+offset_top = 85.5
 offset_right = 123.5
-offset_bottom = 120.5
+offset_bottom = 200.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_wx8ja")
 theme_override_font_sizes/font_size = 40
 text = "QUIT"
 

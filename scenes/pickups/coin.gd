@@ -19,6 +19,7 @@ func _on_body_entered(body) -> void:
 	if body.name == "Player" and not picked:
 		picked = true
 		Global.coins += 1
+		Global.total_coins += 1
 		coin_picked.emit()
 		$AnimatedSprite2D.hide()
 		$ShiningParticles.emitting = true
