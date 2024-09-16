@@ -119,7 +119,8 @@ func check_battery_level(delta: float):
 			battery_died.emit(self.battery_died.get_name())
 
 func _process(delta: float) -> void:
-	check_battery_level(delta)
+	if not Global.intro_scene:
+		check_battery_level(delta)
 	
 	if is_controlled and not is_moving:
 		player_input()
@@ -154,16 +155,17 @@ func get_target_pos(dir: Vector2i) -> void:
 	var tile_data := tile_map.get_cell_tile_data(0,target_tile)
 	
 	if tile_data and not tile_data.get_custom_data("Collidable"):
-		is_moving = true
-		is_move_key_pressed = true
-		target_pos = tile_map.map_to_local(target_tile)
+		assign_target_pos(target_tile)
 	else:
 		var bg_tile_data := bg_tile_map.get_cell_tile_data(0,target_tile)
 		
 		if bg_tile_data and not bg_tile_data.get_custom_data("Collidable"):
-			is_moving = true
-			is_move_key_pressed = true
-			target_pos = tile_map.map_to_local(target_tile)
+			assign_target_pos(target_tile)
+
+func assign_target_pos(tile_pos: Vector2i):
+	is_moving = true
+	is_move_key_pressed = true
+	target_pos = tile_map.map_to_local(tile_pos)
 
 func move_player(delta: float) -> void:
 	global_position = global_position.move_toward(target_pos, MAX_SPEED * delta)

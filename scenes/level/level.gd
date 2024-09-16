@@ -42,6 +42,7 @@ func check_coins() -> void:
 
 func go_to_next_level() -> void:
 	block_controls()
+	Global.has_played = true
 	Global.coins = 0
 	Global.lvlCount += 1
 	var spawn_pos: Vector2i = tile_map.local_to_map(player.position)
@@ -80,6 +81,7 @@ func block_controls() -> void:
 
 func player_death(signal_name) -> void:
 	block_controls()
+	Global.has_played = true
 	
 	if signal_name == "player_hit":
 		death_by_enemy()

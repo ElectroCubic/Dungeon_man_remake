@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cenyt36m1l2n7"]
+[gd_scene load_steps=15 format=3 uid="uid://cenyt36m1l2n7"]
 
 [ext_resource type="PackedScene" uid="uid://dccymvi3jqmpu" path="res://scenes/UI/radar.tscn" id="1_572hq"]
 [ext_resource type="Script" path="res://scenes/UI/ui.gd" id="1_xfng3"]
@@ -35,22 +35,122 @@ font = ExtResource("4_kwcy5")
 font_size = 32
 shadow_size = 0
 
+[sub_resource type="Animation" id="Animation_paiqe"]
+resource_name = "show_info"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LvlInfo:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "Hold SPACE to View Radar"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LvlInfo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 4.8, 5, 9, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LvlInfo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.8, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_lvl_info_text"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_k3viw"]
+resource_name = "show_lvl_info"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LvlInfo:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LvlInfo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LvlInfo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_lvl_info_text"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cm2mt"]
+_data = {
+"show_info": SubResource("Animation_paiqe"),
+"show_lvl_info": SubResource("Animation_k3viw")
+}
+
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_xfng3")
-
-[node name="LvlInfo" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -102.0
-offset_top = 120.0
-offset_right = 102.0
-offset_bottom = 192.0
-grow_horizontal = 2
-text = "LEVEL 1"
-label_settings = SubResource("LabelSettings_6nnhc")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Radar" parent="." instance=ExtResource("1_572hq")]
 anchors_preset = 8
@@ -65,6 +165,19 @@ offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="LvlInfo" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -381.0
+offset_top = 120.0
+offset_right = 381.0
+offset_bottom = 192.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_6nnhc")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BatteryLevel" type="MarginContainer" parent="."]
 offset_left = 24.0
@@ -99,3 +212,8 @@ layout_mode = 2
 label_settings = SubResource("LabelSettings_cuiiv")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cm2mt")
+}

@@ -24,3 +24,5 @@ var lvlCount: int = 1:
 
 var fright_mode: bool = false
 var game_over: bool = false
+var intro_scene: bool = false
+var has_played: bool = false

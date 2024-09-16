@@ -2,6 +2,7 @@ extends CanvasLayer
 
 class_name UI
 
+@onready var animation_player := $AnimationPlayer
 @onready var player = get_node("../Player") as Player
 @onready var battery_bar = $BatteryLevel/BatteryBar
 @onready var coin_counter = $CoinDisplay/CoinCounter
@@ -12,15 +13,14 @@ func _ready() -> void:
 	battery_bar.max_value = player.max_battery_time_sec
 	$Radar.hide()
 	update_stats()
-	lvl_info_fade()
+	
+	if not Global.has_played:
+		animation_player.play("show_info")
+	else:
+		animation_player.play("show_lvl_info")
 
 func update_lvl_info_text():
 	$LvlInfo.text = "Level " + str(Global.lvlCount)
-
-func lvl_info_fade():
-	await get_tree().create_timer(5).timeout
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property($LvlInfo,"modulate:a",0,1.5).set_trans(Tween.TRANS_SINE)
 
 func update_battery_bar() -> void:
 	battery_bar.value = Global.battery_level_sec
@@ -35,7 +35,6 @@ func update_stats() -> void:
 	update_battery_bar()
 	update_coins()
 	update_fright_bar()
-	update_lvl_info_text()
 
 func _unhandled_key_input(event) -> void:
 	if Global.game_over == false:
