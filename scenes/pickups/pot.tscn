@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://eihgnx2kiv0f"]
+
+[ext_resource type="Texture2D" uid="uid://o1flsxohde01" path="res://graphics/tileset/tileset_gray.png" id="1_c4p4v"]
+[ext_resource type="Script" path="res://scenes/pickups/pot.gd" id="1_e8kky"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjruc"]
+atlas = ExtResource("1_c4p4v")
+region = Rect2(0, 0, 256, 80)
+filter_clip = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pkimt"]
+radius = 4.0
+
+[node name="Pot" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_e8kky")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hjruc")
+hframes = 16
+vframes = 5
+frame = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pkimt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

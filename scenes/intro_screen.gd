@@ -5,7 +5,7 @@ extends Node2D
 @onready var tile_map := $TileMap as TileMap
 var pit_tile_atlas_coords: Vector2i = Vector2i(2,3)
 
-func place_pit():
+func place_pit() -> void:
 	block_controls()
 	var spawn_pos: Vector2i = tile_map.local_to_map(player.position)
 	tile_map.set_cell(0,spawn_pos,0,pit_tile_atlas_coords)
@@ -18,6 +18,6 @@ func block_controls() -> void:
 	player.is_controlled = false
 	Global.game_over = true
 
-func _on_pit_area_body_entered(body):
+func _on_pit_area_body_entered(body) -> void:
 	if body.name == "Player":
 		place_pit()

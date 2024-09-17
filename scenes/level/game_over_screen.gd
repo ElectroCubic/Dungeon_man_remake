@@ -49,7 +49,7 @@ func _ready() -> void:
 	seq_popup_text()
 	flash_retry_text()
 
-func seq_popup_text():
+func seq_popup_text() -> void:
 	game_over_text.show()
 	await get_tree().create_timer(1.5).timeout
 	level_info.show()

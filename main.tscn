@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://e1rsk7bqeic2"]
+[gd_scene load_steps=5 format=3 uid="uid://e1rsk7bqeic2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_llr1m"]
 [ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="2_wx8ja"]
+[ext_resource type="AudioStream" uid="uid://6e0p6b3r6mhb" path="res://audio/bgm/Main Menu Loop By Anush.mp3" id="3_pun0f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c8do0"]
 font = ExtResource("2_wx8ja")
@@ -68,6 +69,11 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_wx8ja")
 theme_override_font_sizes/font_size = 40
 text = "QUIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pun0f")
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="MainUI/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainUI/Quit" to="." method="_on_quit_pressed"]

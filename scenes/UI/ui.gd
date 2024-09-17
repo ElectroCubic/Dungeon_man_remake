@@ -19,7 +19,7 @@ func _ready() -> void:
 	else:
 		animation_player.play("show_lvl_info")
 
-func update_lvl_info_text():
+func update_lvl_info_text() -> void:
 	$LvlInfo.text = "Level " + str(Global.lvlCount)
 
 func update_battery_bar() -> void:

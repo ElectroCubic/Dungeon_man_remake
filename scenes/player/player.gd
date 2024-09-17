@@ -40,6 +40,7 @@ func _ready() -> void:
 
 func animate_player() -> void:
 	if is_move_key_pressed and is_moving:
+		$WalkParticles.emitting = true
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:
@@ -64,6 +65,7 @@ func animate_player() -> void:
 				anim.play("Front")
 			
 	else:
+		$WalkParticles.emitting = false
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:
@@ -93,6 +95,7 @@ func check_battery_level(delta: float):
 			fright_mode_activated.emit()
 			Global.fright_mode = true
 			$FrightTimer.start()
+			$OverchargedParticles.emitting = true
 			point_light_2d.color = Color.BLUE_VIOLET
 			
 		Global.fright_level = $FrightTimer.time_left
@@ -175,6 +178,7 @@ func move_player(delta: float) -> void:
 
 func _on_fright_timer_timeout() -> void:
 	fright_mode_deactivated.emit()
+	$OverchargedParticles.emitting = false
 	Global.fright_mode = false
 	Global.battery_level_sec = max_battery_time_sec
 	point_light_2d.color = Color.WHITE
