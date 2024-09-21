@@ -42,6 +42,9 @@ func _ready() -> void:
 func animate_player() -> void:
 	if is_move_key_pressed and is_moving:
 		walk_particles.emitting = true
+		if not AudioManager.walking_sfx.playing:
+			AudioManager.play_walking_sfx()
+		
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:
@@ -64,9 +67,11 @@ func animate_player() -> void:
 				anim.play("Powered_front")
 			else:
 				anim.play("Front")
-			
+		
 	else:
 		walk_particles.emitting = false
+		AudioManager.walking_sfx.stop()
+		
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:

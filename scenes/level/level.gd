@@ -76,6 +76,7 @@ func death_by_enemy() -> void:
 
 func block_controls() -> void:
 	$UI.hide()
+	AudioManager.walking_sfx.stop()
 	player.is_controlled = false
 	player.walk_particles.emitting = false
 	Global.game_over = true

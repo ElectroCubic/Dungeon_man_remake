@@ -37,28 +37,37 @@ func modify_quit_btn_size(from_size: int, to_size: int, time_sec: float) -> void
 	await tween.finished
 
 func _on_play_mouse_entered() -> void:
+	AudioManager.rollover_sfx.play()
 	modify_play_btn_size(normal_btn_font_size1,expand_btn_font_size1,expand_time_sec)
 
 func _on_play_mouse_exited() -> void:
 	modify_play_btn_size(expand_btn_font_size1,normal_btn_font_size1,shrink_time_sec)
 
 func _on_play_pressed() -> void:
+	AudioManager.click_sfx.play()
+	await get_tree().create_timer(0.5).timeout
 	Global.intro_scene = true
 	TransitionLayer.change_scene("res://scenes/intro_screen.tscn")
 
 func _on_quit_pressed() -> void:
+	AudioManager.click_sfx.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().quit()
 
 func _on_quit_mouse_entered() -> void:
+	AudioManager.rollover_sfx.play()
 	modify_quit_btn_size(normal_btn_font_size2,expand_btn_font_size2,expand_time_sec)
 
 func _on_quit_mouse_exited() -> void:
 	modify_quit_btn_size(expand_btn_font_size2,normal_btn_font_size2,shrink_time_sec)
 
 func _on_options_pressed():
+	AudioManager.click_sfx.play()
+	await get_tree().create_timer(0.5).timeout
 	$OptionsMenuScreen.show()
 
 func _on_options_mouse_entered() -> void:
+	AudioManager.rollover_sfx.play()
 	modify_options_btn_size(normal_btn_font_size2,expand_btn_font_size2,expand_time_sec)
 
 func _on_options_mouse_exited() -> void:

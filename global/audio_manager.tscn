@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://0k7pq40ywdlm"]
+
+[ext_resource type="Script" path="res://global/AudioManager.gd" id="1_c734y"]
+[ext_resource type="AudioStream" uid="uid://6e0p6b3r6mhb" path="res://audio/bgm/Main Menu Loop By Anush.mp3" id="2_qb0v4"]
+[ext_resource type="AudioStream" uid="uid://crx8vphn0ky8g" path="res://audio/sfx/WalkingSound.mp3" id="3_xdbkq"]
+[ext_resource type="AudioStream" uid="uid://c3v33bqdos6fq" path="res://audio/sfx/click1.ogg" id="4_ichr7"]
+[ext_resource type="AudioStream" uid="uid://dj1vmeai5cjbt" path="res://audio/sfx/rollover1.ogg" id="5_6c467"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_c734y")
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qb0v4")
+volume_db = -12.0
+bus = &"Music"
+
+[node name="WalkingSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xdbkq")
+volume_db = -12.0
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="ClickSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ichr7")
+volume_db = 4.0
+bus = &"SFX"
+
+[node name="RolloverSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6c467")
+volume_db = 2.0
+pitch_scale = 1.25
+bus = &"SFX"

@@ -5,6 +5,9 @@ extends Node2D
 @onready var tile_map := $TileMap as TileMap
 var pit_tile_atlas_coords: Vector2i = Vector2i(2,3)
 
+func _ready():
+	AudioManager.bgm_player.stop()
+
 func place_pit() -> void:
 	block_controls()
 	var spawn_pos: Vector2i = tile_map.local_to_map(player.position)
@@ -15,6 +18,7 @@ func place_pit() -> void:
 	TransitionLayer.change_scene("res://scenes/level/level.tscn")
 
 func block_controls() -> void:
+	AudioManager.walking_sfx.stop()
 	player.is_controlled = false
 	Global.game_over = true
 
