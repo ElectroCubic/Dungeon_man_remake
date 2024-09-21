@@ -49,7 +49,7 @@ func update_radar_pos() -> void:
 		
 		if entity is Pickup:
 			if entity_pos.x == 0 or entity_pos.x == grid.size.x or entity_pos.y == 0 or entity_pos.y == grid.size.y:
-				markers[entity].scale = Vector2(0.55,0.55)
+				markers[entity].scale = Vector2(0.75,0.75)
 			else:
 				markers[entity].scale = Vector2(0.45,0.45)
 

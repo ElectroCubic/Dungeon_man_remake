@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7r0porc8j818"]
+
+[ext_resource type="Script" path="res://scenes/UI/options_menu_screen.gd" id="1_dc1rn"]
+[ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="2_67h0f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iisrt"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="OptionsMenuScreen" type="CanvasLayer"]
+script = ExtResource("1_dc1rn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 40
+columns = 2
+
+[node name="MusicText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_67h0f")
+theme_override_font_sizes/font_size = 36
+text = "MUSIC"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="SFXText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_67h0f")
+theme_override_font_sizes/font_size = 36
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="Back" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -188.0
+offset_right = 165.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(1, 0.916077, 0.0234375, 1)
+theme_override_fonts/font = ExtResource("2_67h0f")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_iisrt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iisrt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iisrt")
+theme_override_styles/focus = SubResource("StyleBoxFlat_iisrt")
+text = "BACK TO MENU"
+flat = true
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="mouse_entered" from="Back" to="." method="_on_back_mouse_entered"]
+[connection signal="mouse_exited" from="Back" to="." method="_on_back_mouse_exited"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

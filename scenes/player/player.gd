@@ -17,6 +17,7 @@ signal battery_died(sig_name)
 @onready var anim := $AnimatedSprite2D
 @onready var point_light_2d := $PointLight2D
 @onready var fright_bar := $FrightLevel/FrightBar
+@onready var walk_particles = $WalkParticles
 
 var target_pos: Vector2
 var is_moving: bool = false
@@ -40,7 +41,7 @@ func _ready() -> void:
 
 func animate_player() -> void:
 	if is_move_key_pressed and is_moving:
-		$WalkParticles.emitting = true
+		walk_particles.emitting = true
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:
@@ -65,7 +66,7 @@ func animate_player() -> void:
 				anim.play("Front")
 			
 	else:
-		$WalkParticles.emitting = false
+		walk_particles.emitting = false
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
 			if Global.fright_mode:

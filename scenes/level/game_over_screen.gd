@@ -45,24 +45,33 @@ var mystery_text_list: Array[String] = [
 func _ready() -> void:
 	display_lvl_count()
 	display_mystery_text()
-	display_total_coins()
 	seq_popup_text()
-	flash_retry_text()
+
+func coin_counter_anim() -> void:
+	var tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_method(display_total_coins,0,Global.total_coins,3)
+	tween.tween_callback(retry_enable)
+	await tween.finished
 
 func seq_popup_text() -> void:
 	game_over_text.show()
 	await get_tree().create_timer(1.5).timeout
 	level_info.show()
+	await get_tree().create_timer(1).timeout
 	coin_text.show()
+	coin_counter_anim() 
+
+func display_total_coins(count: int) -> void:
+	$CoinText.text = "Total Coins: " + str(count)
+
+func retry_enable() -> void:
 	await get_tree().create_timer(1).timeout
 	mystery_text.show()
 	await get_tree().create_timer(1.5).timeout
 	retry_text.show()
 	can_continue = true
-
-func display_total_coins() -> void:
-	$CoinText.text = "Total Coins: " + str(Global.total_coins)
 	Global.total_coins = 0
+	flash_retry_text()
 
 func display_lvl_count() -> void:
 	$LevelInfo.text = "AT LEVEL " + str(Global.lvlCount)

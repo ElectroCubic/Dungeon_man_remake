@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Main
+
 @onready var playBtn := $MainUI/Play
 @onready var optionsBtn := $MainUI/Options
 @onready var quitBtn := $MainUI/Quit
@@ -52,6 +54,9 @@ func _on_quit_mouse_entered() -> void:
 
 func _on_quit_mouse_exited() -> void:
 	modify_quit_btn_size(expand_btn_font_size2,normal_btn_font_size2,shrink_time_sec)
+
+func _on_options_pressed():
+	$OptionsMenuScreen.show()
 
 func _on_options_mouse_entered() -> void:
 	modify_options_btn_size(normal_btn_font_size2,expand_btn_font_size2,expand_time_sec)
