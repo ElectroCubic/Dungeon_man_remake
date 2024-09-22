@@ -6,7 +6,7 @@ extends Node2D
 var pit_tile_atlas_coords: Vector2i = Vector2i(2,3)
 
 func _ready():
-	AudioManager.bgm_player.stop()
+	AudioManager.fade_in_music()
 
 func place_pit() -> void:
 	block_controls()

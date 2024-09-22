@@ -4,4 +4,5 @@ extends Area2D
 
 func _on_body_entered(body) -> void:
 	if body.name == "Player":
+		AudioManager.play_pot_break_sfx()
 		sprite_2d.frame = 15

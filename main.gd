@@ -45,6 +45,7 @@ func _on_play_mouse_exited() -> void:
 
 func _on_play_pressed() -> void:
 	AudioManager.click_sfx.play()
+	AudioManager.fade_out_music()
 	await get_tree().create_timer(0.5).timeout
 	Global.intro_scene = true
 	TransitionLayer.change_scene("res://scenes/intro_screen.tscn")
