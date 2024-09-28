@@ -18,6 +18,7 @@ func _on_body_entered(body) -> void:
 		
 		if Global.coins >= coins_to_open:
 			is_closed = false
+			AudioManager.play_sfx(AudioManager.door_open_sfx)
 			animated_sprite_2d.play("open_door")
 			await animated_sprite_2d.animation_finished
 			$LightOccluder2D.hide()

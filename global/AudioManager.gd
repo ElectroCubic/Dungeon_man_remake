@@ -1,10 +1,21 @@
 extends Node
 
-@onready var bgm_player = $BGMPlayer
-@onready var walking_sfx = $WalkingSfx
-@onready var click_sfx = $ClickSfx
-@onready var rollover_sfx = $RolloverSfx
-@onready var pot_breaking_sfx = $PotBreakingSfx
+@onready var bgm_player := $BGMPlayer
+@onready var walking_sfx := $WalkingSfx
+@onready var click_sfx := $ClickSfx
+@onready var rollover_sfx := $RolloverSfx
+@onready var pot_breaking_sfx := $PotBreakingSfx
+@onready var radar_ping_sfx := $RadarPingSFX
+@onready var coin_collect_sfx := $CoinCollectSFX
+@onready var coin_counter_sfx := $CoinCounterSFX
+@onready var battery_powerup_sfx := $BatteryPowerupSFX
+@onready var battery_collect_sfx := $BatteryCollectSFX
+@onready var door_open_sfx := $DoorOpenSFX
+@onready var death_sfx := $DeathSFX
+@onready var popup_sfx := $PopupSFX
+@onready var game_over_sfx := $GameOverSFX
+@onready var rock_breaking_sfx := $RockBreakingSFX
+
 @onready var music_bus_id: int = AudioServer.get_bus_index("Music")
 @onready var sfx_bus_id: int = AudioServer.get_bus_index("SFX")
 
@@ -12,15 +23,12 @@ extends Node
 @export_range(0.0,5.0,0.1) var music_fade_out_time: float = 3.0
 var current_set_music_vol: float = 1.0
 
-func _ready() -> void:
-	bgm_player.play()
+func change_bgm(stream: AudioStream) -> void:
+	bgm_player.stream = stream
 
-func play_pot_break_sfx() -> void:
-	pot_breaking_sfx.pitch_scale = randf_range(0.8,1.2)
-	pot_breaking_sfx.play()
-
-func play_walking_sfx() -> void:
-	walking_sfx.play()
+func play_sfx(player: AudioStreamPlayer, rangeStart := 1.0, rangeEnd := 1.0):
+	player.pitch_scale = randf_range(rangeStart,rangeEnd)
+	player.play()
 
 func fade_out_music() -> void:
 	var tween: Tween = get_tree().create_tween()

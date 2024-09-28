@@ -5,9 +5,6 @@ extends Node2D
 @onready var tile_map := $TileMap as TileMap
 var pit_tile_atlas_coords: Vector2i = Vector2i(2,3)
 
-func _ready():
-	AudioManager.fade_in_music()
-
 func place_pit() -> void:
 	block_controls()
 	var spawn_pos: Vector2i = tile_map.local_to_map(player.position)
@@ -25,3 +22,4 @@ func block_controls() -> void:
 func _on_pit_area_body_entered(body) -> void:
 	if body.name == "Player":
 		place_pit()
+		AudioManager.play_sfx(AudioManager.rock_breaking_sfx)

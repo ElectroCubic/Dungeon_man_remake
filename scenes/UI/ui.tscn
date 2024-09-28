@@ -217,3 +217,8 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_cm2mt")
 }
+
+[node name="RadarPingTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="RadarPingTimer" to="." method="_on_radar_ping_timer_timeout"]

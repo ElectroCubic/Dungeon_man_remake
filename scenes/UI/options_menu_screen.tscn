@@ -1,7 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7r0porc8j818"]
+[gd_scene load_steps=10 format=3 uid="uid://b7r0porc8j818"]
 
 [ext_resource type="Script" path="res://scenes/UI/options_menu_screen.gd" id="1_dc1rn"]
 [ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="2_67h0f"]
+[ext_resource type="Texture2D" uid="uid://b7db0yw8v46ux" path="res://graphics/UI/menu/slide_hangle.png" id="3_7ggdi"]
+[ext_resource type="Texture2D" uid="uid://buyggxma33ys" path="res://graphics/UI/menu/slide_horizontal_grey.png" id="4_4u31n"]
+[ext_resource type="Texture2D" uid="uid://dtidgnbc8bnui" path="res://graphics/UI/menu/slide_horizontal_color_section.png" id="5_bs4xj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4egfl"]
+texture = ExtResource("4_4u31n")
+texture_margin_left = 40.0
+texture_margin_top = 10.0
+texture_margin_right = 40.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dgxvs"]
+texture = ExtResource("5_bs4xj")
+texture_margin_left = 35.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ta1jc"]
+texture = ExtResource("4_4u31n")
+texture_margin_left = 40.0
+texture_margin_top = 10.0
+texture_margin_right = 40.0
+texture_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iisrt"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -50,11 +71,15 @@ text = "MUSIC"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("3_7ggdi")
+theme_override_icons/grabber_highlight = ExtResource("3_7ggdi")
+theme_override_styles/slider = SubResource("StyleBoxTexture_4egfl")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_dgxvs")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_dgxvs")
 max_value = 1.0
 step = 0.05
 value = 1.0
 tick_count = 21
-ticks_on_borders = true
 
 [node name="SFXText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -66,11 +91,15 @@ text = "SFX"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_icons/grabber = ExtResource("3_7ggdi")
+theme_override_icons/grabber_highlight = ExtResource("3_7ggdi")
+theme_override_styles/slider = SubResource("StyleBoxTexture_ta1jc")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_dgxvs")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_dgxvs")
 max_value = 1.0
 step = 0.05
 value = 1.0
 tick_count = 21
-ticks_on_borders = true
 
 [node name="Back" type="Button" parent="."]
 anchors_preset = 7

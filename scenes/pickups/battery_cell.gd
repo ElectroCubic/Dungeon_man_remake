@@ -46,5 +46,6 @@ func _on_body_entered(body) -> void:
 		picked = true
 		Global.battery_level_sec += battery_refill_value
 		item_picked.emit(self)
+		AudioManager.play_sfx(AudioManager.battery_collect_sfx)
 		await remove_battery()
 		queue_free()

@@ -43,7 +43,7 @@ func animate_player() -> void:
 	if is_move_key_pressed and is_moving:
 		walk_particles.emitting = true
 		if not AudioManager.walking_sfx.playing:
-			AudioManager.play_walking_sfx()
+			AudioManager.play_sfx(AudioManager.walking_sfx)
 		
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
@@ -99,6 +99,7 @@ func check_battery_level(delta: float):
 	if Global.battery_level_sec > max_battery_time_sec:
 		if not $FrightTimer.time_left:
 			fright_mode_activated.emit()
+			AudioManager.play_sfx(AudioManager.battery_powerup_sfx)
 			Global.fright_mode = true
 			$FrightTimer.start()
 			$OverchargedParticles.emitting = true

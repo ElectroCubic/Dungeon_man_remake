@@ -21,6 +21,7 @@ func _on_body_entered(body) -> void:
 		Global.coins += 1
 		Global.total_coins += 1
 		coin_picked.emit()
+		AudioManager.play_sfx(AudioManager.coin_collect_sfx,0.9,1.1)
 		$AnimatedSprite2D.hide()
 		$ShiningParticles.emitting = true
 		await $ShiningParticles.finished

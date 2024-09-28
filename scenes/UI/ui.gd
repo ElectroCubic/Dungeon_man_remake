@@ -44,3 +44,7 @@ func _unhandled_key_input(event) -> void:
 		elif event.is_action_released("Show_Radar"):
 			player.is_controlled = true
 			$Radar.hide()
+
+func _on_radar_ping_timer_timeout():
+	if $Radar.visible and not AudioManager.radar_ping_sfx.playing:
+		AudioManager.play_sfx(AudioManager.radar_ping_sfx,0.9,1.2)

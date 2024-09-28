@@ -7,10 +7,15 @@ signal twinkle_mode
 @onready var player := $Player as Player
 @onready var tile_map := $TileMap as TileMap
 @export var twinkle_mode_coin_amt: int = 10
+@onready var cave_bgm := preload("res://audio/bgm/Scary_cave_ambience.wav")
 var player_last_pos: Vector2i
 var pit_tile_atlas_coords: Vector2i = Vector2i(2,3)
 
 func _ready() -> void:
+	AudioManager.change_bgm(cave_bgm)
+	AudioManager.bgm_player.play()
+	AudioManager.fade_in_music()
+	
 	if Global.game_over:
 		Global.game_over = false
 		player.is_controlled = true
@@ -82,6 +87,8 @@ func block_controls() -> void:
 	Global.game_over = true
 
 func player_death(signal_name) -> void:
+	AudioManager.play_sfx(AudioManager.death_sfx)
+	AudioManager.fade_out_music()
 	block_controls()
 	Global.has_played = true
 	
