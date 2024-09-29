@@ -10,9 +10,26 @@ class_name Main
 @export var normal_btn_font_size2: int = 42
 @export var expand_btn_font_size2: int = 56
 @export_range(0.0,1.0,0.1) var move_time_sec: float = 0.1
-
+@export_range(0.1,1.0) var float_duration: float = 0.8
+@export_range(0.1,1.0) var float_interval: float = 0.1
+@export var float_offset: int = 15
 var min_mouse_hover_time: float = 0.05
 var change_size: bool = false
+var float_tween: Tween
+
+func _ready() -> void:
+	start_floating()
+
+func start_floating() -> void:
+	float_tween = get_tree().create_tween().set_loops()
+	float_tween.tween_property($MainUI/TitleText, "position:y", -float_offset, float_duration).as_relative()
+	float_tween.tween_interval(float_interval)
+	float_tween.tween_property($MainUI/TitleText, "position:y", float_offset, float_duration).as_relative()
+	float_tween.tween_interval(float_interval)
+
+func stop_floating() -> void:
+	float_tween.stop()
+	float_tween.kill()
 
 func change_play_font_size(size: int) -> void:
 	playBtn.add_theme_font_size_override("font_size",size)
@@ -43,6 +60,7 @@ func _on_play_pressed() -> void:
 	AudioManager.fade_out_music()
 	await get_tree().create_timer(0.5).timeout
 	Global.intro_scene = true
+	stop_floating()
 	TransitionLayer.change_scene("res://scenes/intro_screen.tscn")
 
 func _on_options_pressed() -> void:

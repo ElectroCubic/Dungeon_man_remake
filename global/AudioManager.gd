@@ -9,6 +9,7 @@ extends Node
 @onready var coin_collect_sfx := $CoinCollectSFX
 @onready var battery_powerup_sfx := $BatteryPowerupSFX
 @onready var battery_collect_sfx := $BatteryCollectSFX
+@onready var battery_power_down_sfx := $BatteryPowerDownSFX
 @onready var door_open_sfx := $DoorOpenSFX
 @onready var death_sfx := $DeathSFX
 @onready var popup_sfx := $PopupSFX

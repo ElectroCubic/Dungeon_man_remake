@@ -90,7 +90,8 @@ func block_controls() -> void:
 	Global.game_over = true
 
 func player_death(signal_name) -> void:
-	AudioManager.play_sfx(AudioManager.death_sfx)
+	if not AudioManager.death_sfx.playing:
+		AudioManager.death_sfx.play()
 	AudioManager.fade_out_music()
 	block_controls()
 	Global.has_played = true

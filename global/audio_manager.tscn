@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://0k7pq40ywdlm"]
+[gd_scene load_steps=18 format=3 uid="uid://0k7pq40ywdlm"]
 
 [ext_resource type="Script" path="res://global/AudioManager.gd" id="1_c734y"]
 [ext_resource type="AudioStream" uid="uid://banky6dpk1j67" path="res://audio/bgm/DungeonManTheme.mp3" id="2_grmv0"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://bved02eer1602" path="res://audio/sfx/BatteryCollectSFX.mp3" id="10_e7sl2"]
 [ext_resource type="AudioStream" uid="uid://csdgft04xe5bu" path="res://audio/sfx/DoorOpenSFX.wav" id="11_66s0p"]
 [ext_resource type="AudioStream" uid="uid://c85jjpm7j870h" path="res://audio/sfx/DeathSFX.mp3" id="12_b533r"]
+[ext_resource type="AudioStream" uid="uid://d4ganyx7p5ldp" path="res://audio/sfx/BatteryPowerDown.mp3" id="12_qrdj1"]
 [ext_resource type="AudioStream" uid="uid://p7ger8hbgnj" path="res://audio/sfx/GameOverSFX.wav" id="14_g8bbb"]
 [ext_resource type="AudioStream" uid="uid://dhtqrliktil8q" path="res://audio/sfx/PopupSFX.wav" id="15_fhoi1"]
 
@@ -68,6 +69,12 @@ bus = &"SFX"
 [node name="BatteryPowerupSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_lgbr1")
 volume_db = -2.0
+bus = &"SFX"
+
+[node name="BatteryPowerDownSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_qrdj1")
+volume_db = -2.0
+pitch_scale = 1.69
 bus = &"SFX"
 
 [node name="BatteryCollectSFX" type="AudioStreamPlayer" parent="."]

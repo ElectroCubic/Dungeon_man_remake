@@ -34,6 +34,7 @@ func set_exit_pos() -> void:
 		$Marker2D.position = Vector2(0,16)
 
 func _on_body_entered(body) -> void:
+	AudioManager.play_sfx(AudioManager.popup_sfx)
 	body.is_move_key_pressed = false
 	body.is_moving = false
 	body.direction = exit.exit_direction

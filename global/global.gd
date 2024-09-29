@@ -22,7 +22,7 @@ var lvlCount: int = 1:
 		lvlCount = value
 		stat_change.emit()
 
-var total_coins: int = 5
+var total_coins: int = 0
 var fright_mode: bool = false
 var game_over: bool = false
 var intro_scene: bool = false

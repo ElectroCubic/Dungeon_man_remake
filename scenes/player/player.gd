@@ -43,7 +43,7 @@ func animate_player() -> void:
 	if is_move_key_pressed and is_moving:
 		walk_particles.emitting = true
 		if not AudioManager.walking_sfx.playing:
-			AudioManager.play_sfx(AudioManager.walking_sfx)
+			AudioManager.walking_sfx.play()
 		
 		if direction == Vector2.LEFT:
 			anim.flip_h = true
@@ -99,7 +99,7 @@ func check_battery_level(delta: float):
 	if Global.battery_level_sec > max_battery_time_sec:
 		if not $FrightTimer.time_left:
 			fright_mode_activated.emit()
-			AudioManager.play_sfx(AudioManager.battery_powerup_sfx)
+			AudioManager.battery_powerup_sfx.play()
 			Global.fright_mode = true
 			$FrightTimer.start()
 			$OverchargedParticles.emitting = true
@@ -131,7 +131,7 @@ func check_battery_level(delta: float):
 func _process(delta: float) -> void:
 	if not Global.intro_scene:
 		check_battery_level(delta)
-	
+
 	if is_controlled and not is_moving:
 		player_input()
 
@@ -172,7 +172,7 @@ func get_target_pos(dir: Vector2i) -> void:
 		if bg_tile_data and not bg_tile_data.get_custom_data("Collidable"):
 			assign_target_pos(target_tile)
 
-func assign_target_pos(tile_pos: Vector2i):
+func assign_target_pos(tile_pos: Vector2i) -> void:
 	is_moving = true
 	is_move_key_pressed = true
 	target_pos = tile_map.map_to_local(tile_pos)
@@ -185,6 +185,7 @@ func move_player(delta: float) -> void:
 
 func _on_fright_timer_timeout() -> void:
 	fright_mode_deactivated.emit()
+	AudioManager.battery_power_down_sfx.play()
 	$OverchargedParticles.emitting = false
 	Global.fright_mode = false
 	Global.battery_level_sec = max_battery_time_sec
