@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://8leq6wo0yvbd"]
+[gd_scene load_steps=23 format=3 uid="uid://8leq6wo0yvbd"]
 
 [ext_resource type="Script" path="res://scenes/enemy/active_enemy.gd" id="1_kfwt0"]
 [ext_resource type="Texture2D" uid="uid://dilg8qcxxp3m2" path="res://graphics/enemies/active_enemy.png" id="2_arj7c"]
+[ext_resource type="AudioStream" uid="uid://bw0eutk0uyhea" path="res://audio/sfx/Ghostly Laughing.mp3" id="3_lekdr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o0p2s"]
 atlas = ExtResource("2_arj7c")
@@ -182,6 +183,7 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_77bk4")
 
 [node name="DetectionZone" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_64684")
@@ -189,6 +191,16 @@ shape = SubResource("CircleShape2D_64684")
 [node name="TeleportTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lekdr")
+volume_db = 2.0
+autoplay = true
+max_distance = 200.0
+attenuation = 1.56918
+panning_strength = 1.22
+bus = &"SFX"
+area_mask = 3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]

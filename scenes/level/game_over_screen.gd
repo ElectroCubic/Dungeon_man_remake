@@ -50,9 +50,12 @@ func _ready() -> void:
 func coin_counter_anim() -> void:
 	var tween := get_tree().create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	tween.tween_method(display_total_coins,0,Global.total_coins,3)
-	tween.tween_callback(retry_enable)
+	tween.chain().tween_callback(retry_enable)
 	await tween.finished
 
+func display_total_coins(count: int) -> void:
+	$CoinText.text = "Total Coins: " + str(count)
+	
 func seq_popup_text() -> void:
 	game_over_text.show()
 	AudioManager.play_sfx(AudioManager.game_over_sfx)
@@ -61,11 +64,14 @@ func seq_popup_text() -> void:
 	AudioManager.play_sfx(AudioManager.popup_sfx)
 	await get_tree().create_timer(1).timeout
 	coin_text.show()
-	coin_counter_anim() 
-
-func display_total_coins(count: int) -> void:
-	$CoinText.text = "Total Coins: " + str(count)
-	
+	coin_counter_anim()
+	if Global.total_coins != 0:
+		if Global.total_coins < 10:
+			AudioManager.coin_counter_sfx.play(0.35)
+		else:
+			AudioManager.coin_counter_sfx.play()
+	else:
+		AudioManager.play_sfx(AudioManager.popup_sfx)
 
 func retry_enable() -> void:
 	await get_tree().create_timer(1).timeout
@@ -101,6 +107,7 @@ func _unhandled_key_input(_event) -> void:
 	
 	if Input.is_action_just_pressed("Show_Radar") and can_continue:
 		stop_flashing()
+		AudioManager.play_sfx(AudioManager.rollover_sfx)
 		Global.lvlCount = 1
 		Global.coins = 0
 		TransitionLayer.change_scene("res://scenes/level/level.tscn")

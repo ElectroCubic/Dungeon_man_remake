@@ -7,7 +7,6 @@ extends Node
 @onready var pot_breaking_sfx := $PotBreakingSfx
 @onready var radar_ping_sfx := $RadarPingSFX
 @onready var coin_collect_sfx := $CoinCollectSFX
-@onready var coin_counter_sfx := $CoinCounterSFX
 @onready var battery_powerup_sfx := $BatteryPowerupSFX
 @onready var battery_collect_sfx := $BatteryCollectSFX
 @onready var door_open_sfx := $DoorOpenSFX
@@ -15,6 +14,7 @@ extends Node
 @onready var popup_sfx := $PopupSFX
 @onready var game_over_sfx := $GameOverSFX
 @onready var rock_breaking_sfx := $RockBreakingSFX
+@onready var coin_counter_sfx = $CoinCounterSFX
 
 @onready var music_bus_id: int = AudioServer.get_bus_index("Music")
 @onready var sfx_bus_id: int = AudioServer.get_bus_index("SFX")
@@ -26,7 +26,7 @@ var current_set_music_vol: float = 1.0
 func change_bgm(stream: AudioStream) -> void:
 	bgm_player.stream = stream
 
-func play_sfx(player: AudioStreamPlayer, rangeStart := 1.0, rangeEnd := 1.0):
+func play_sfx(player: AudioStreamPlayer, rangeStart := 1.0, rangeEnd := 1.0) -> void:
 	player.pitch_scale = randf_range(rangeStart,rangeEnd)
 	player.play()
 

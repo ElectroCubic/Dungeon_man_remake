@@ -12,7 +12,8 @@ var player_last_pos: Vector2i
 var pit_tile_atlas_coords: Vector2i = Vector2i(2,3)
 
 func _ready() -> void:
-	AudioManager.change_bgm(cave_bgm)
+	if AudioManager.bgm_player.stream != cave_bgm:
+		AudioManager.change_bgm(cave_bgm)
 	AudioManager.bgm_player.play()
 	AudioManager.fade_in_music()
 	
@@ -46,6 +47,7 @@ func check_coins() -> void:
 		go_to_next_level()
 
 func go_to_next_level() -> void:
+	AudioManager.fade_out_music()
 	block_controls()
 	Global.has_played = true
 	Global.coins = 0
@@ -53,6 +55,7 @@ func go_to_next_level() -> void:
 	var spawn_pos: Vector2i = tile_map.local_to_map(player.position)
 	tile_map.set_cell(0,spawn_pos,0,pit_tile_atlas_coords)
 	player.player_pit_fall_anim()
+	AudioManager.play_sfx(AudioManager.rock_breaking_sfx)
 	await get_tree().create_timer(1).timeout
 	TransitionLayer.change_scene("res://scenes/level/level.tscn")
 

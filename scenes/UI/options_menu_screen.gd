@@ -3,17 +3,12 @@ extends CanvasLayer
 @onready var main = get_node("../") as Main
 @onready var backBtn = $Back
 
-func _on_music_slider_value_changed(value) -> void:
-	if not AudioManager.click_sfx.playing:
-		AudioManager.click_sfx.play()
-		
+func _on_music_slider_value_changed(value) -> void:	
 	AudioManager.current_set_music_vol = value
 	AudioServer.set_bus_volume_db(AudioManager.music_bus_id,linear_to_db(value))
 	AudioServer.set_bus_mute(AudioManager.music_bus_id, value < 0.05)
 
 func _on_sfx_slider_value_changed(value) -> void:
-	if not AudioManager.click_sfx.playing:
-		AudioManager.click_sfx.play()
 	AudioServer.set_bus_volume_db(AudioManager.sfx_bus_id,linear_to_db(value))
 	AudioServer.set_bus_mute(AudioManager.sfx_bus_id, value < 0.05)
 

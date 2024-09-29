@@ -22,4 +22,5 @@ func block_controls() -> void:
 func _on_pit_area_body_entered(body) -> void:
 	if body.name == "Player":
 		place_pit()
+		await get_tree().create_timer(0.3).timeout
 		AudioManager.play_sfx(AudioManager.rock_breaking_sfx)
