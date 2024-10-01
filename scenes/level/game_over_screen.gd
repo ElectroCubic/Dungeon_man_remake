@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var coin_text := $CoinText
 @onready var mystery_text := $MysteryText
 @onready var retry_text := $RetryText
+@onready var retry_btn = $RetryBtn
 @export_range(0.1,1.0) var flash_duration: float = 0.8
 @export_range(0.1,1.0) var flash_interval: float = 0.1
 var flash_tween: Tween
@@ -43,6 +44,8 @@ var mystery_text_list: Array[String] = [
 ]
 
 func _ready() -> void:
+	if OS.get_name() in ["Windows","macOS"]:
+		retry_btn.queue_free()
 	display_lvl_count()
 	display_mystery_text()
 	seq_popup_text()

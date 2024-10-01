@@ -1,6 +1,6 @@
 extends Control
 
 func _ready():
-	if not OS.get_name() in ["android","iOS"]:
+	if OS.get_name() in ["Windows","macOS"]:
 		queue_free()
 
