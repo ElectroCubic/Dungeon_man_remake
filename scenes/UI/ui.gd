@@ -36,7 +36,7 @@ func update_stats() -> void:
 	update_coins()
 	update_fright_bar()
 
-func _unhandled_key_input(event) -> void:
+func _unhandled_input(event) -> void:
 	if Global.game_over == false:
 		if event.is_action_pressed("Show_Radar"):
 			player.is_controlled = false

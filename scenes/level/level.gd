@@ -6,6 +6,7 @@ signal twinkle_mode
 
 @onready var player := $Player as Player
 @onready var tile_map := $TileMap as TileMap
+@onready var fg_tile_map = $FgTileMap as TileMap
 @export var twinkle_mode_coin_amt: int = 10
 @onready var cave_bgm := preload("res://audio/bgm/Scary_cave_ambience.wav")
 var player_last_pos: Vector2i
@@ -54,6 +55,7 @@ func go_to_next_level() -> void:
 	Global.lvlCount += 1
 	var spawn_pos: Vector2i = tile_map.local_to_map(player.position)
 	tile_map.set_cell(0,spawn_pos,0,pit_tile_atlas_coords)
+	fg_tile_map.erase_cell(0,spawn_pos)
 	player.player_pit_fall_anim()
 	AudioManager.play_sfx(AudioManager.rock_breaking_sfx)
 	await get_tree().create_timer(1).timeout

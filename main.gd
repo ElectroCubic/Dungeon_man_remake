@@ -5,6 +5,7 @@ class_name Main
 @onready var playBtn := $MainUI/Play
 @onready var optionsBtn := $MainUI/Options
 @onready var quitBtn := $MainUI/Quit
+@onready var point_light_2d = $PointLight2D
 @export var normal_btn_font_size1: int = 56
 @export var expand_btn_font_size1: int = 78
 @export var normal_btn_font_size2: int = 42
@@ -19,6 +20,11 @@ var float_tween: Tween
 
 func _ready() -> void:
 	start_floating()
+	RenderingServer.set_default_clear_color(Color.BLACK)
+
+func _input(event) -> void:
+	if event is InputEventMouseMotion:
+		point_light_2d.position = event.position
 
 func start_floating() -> void:
 	float_tween = get_tree().create_tween().set_loops()
@@ -59,8 +65,8 @@ func _on_play_pressed() -> void:
 	AudioManager.click_sfx.play()
 	AudioManager.fade_out_music()
 	await get_tree().create_timer(0.5).timeout
-	Global.intro_scene = true
 	stop_floating()
+	Global.intro_scene = true
 	TransitionLayer.change_scene("res://scenes/intro_screen.tscn")
 
 func _on_options_pressed() -> void:

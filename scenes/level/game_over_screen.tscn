@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmw3835hy5qo3"]
+[gd_scene load_steps=4 format=3 uid="uid://dmw3835hy5qo3"]
 
 [ext_resource type="Script" path="res://scenes/level/game_over_screen.gd" id="1_wt2ng"]
 [ext_resource type="FontFile" uid="uid://djc2dmi8tli7h" path="res://resources/Kenney Pixel Square.ttf" id="2_xxrfk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6flq"]
+size = Vector2(1920, 1080)
 
 [node name="GameOverScreen" type="CanvasLayer"]
 layer = 0
@@ -109,3 +112,12 @@ theme_override_font_sizes/font_size = 34
 text = "PRESS SPACE TO CONTINUE"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RetryBtn" type="TouchScreenButton" parent="."]
+position = Vector2(616, 344)
+shape = SubResource("RectangleShape2D_n6flq")
+shape_centered = false
+passby_press = true
+action = "Show_Radar"
+visibility_mode = 1
+metadata/_edit_lock_ = true

@@ -102,15 +102,13 @@ func stop_flashing() -> void:
 	flash_tween.stop()
 	flash_tween.kill()
 
-func _unhandled_key_input(_event) -> void:
-	# Retry
-	
-	if Input.is_action_just_pressed("Show_Radar") and can_continue:
+func _unhandled_input(event) -> void:
+	if event.is_action_pressed("Show_Radar") and can_continue:
 		stop_flashing()
 		AudioManager.play_sfx(AudioManager.rollover_sfx)
 		Global.lvlCount = 1
 		Global.coins = 0
 		TransitionLayer.change_scene("res://scenes/level/level.tscn")
 		
-	elif Input.is_action_just_pressed("ui_cancel"):
+	elif event.is_action_pressed("ui_cancel"):
 		get_tree().quit()

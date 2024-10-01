@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	check_player_presence()
 	move_enemy(delta)
 
-func animate(ray_angle: float):
+func animate(ray_angle: float) -> void:
 	# face right or face left
 	if ray_angle == 0 or ray_angle == 180:
 		anim.flip_v = false
