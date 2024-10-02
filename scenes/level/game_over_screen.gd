@@ -77,7 +77,6 @@ func seq_popup_text() -> void:
 		AudioManager.play_sfx(AudioManager.popup_sfx)
 
 func retry_enable() -> void:
-	await get_tree().create_timer(1).timeout
 	mystery_text.show()
 	AudioManager.play_sfx(AudioManager.popup_sfx)
 	await get_tree().create_timer(1.5).timeout

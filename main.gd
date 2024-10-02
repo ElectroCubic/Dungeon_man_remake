@@ -22,9 +22,8 @@ func _ready() -> void:
 	start_floating()
 	RenderingServer.set_default_clear_color(Color.BLACK)
 
-func _input(event) -> void:
-	if event is InputEventMouseMotion:
-		point_light_2d.position = event.position
+func _process(_delta):
+	point_light_2d.position = get_global_mouse_position()
 
 func start_floating() -> void:
 	float_tween = get_tree().create_tween().set_loops()

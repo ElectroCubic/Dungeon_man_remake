@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3tm55yyxkdmi"]
+[gd_scene load_steps=10 format=3 uid="uid://d3tm55yyxkdmi"]
 
 [ext_resource type="Script" path="res://scenes/UI/touch_btns.gd" id="1_cjxri"]
 [ext_resource type="Texture2D" uid="uid://cljxn8l0m7nkt" path="res://graphics/UI/PlayerBtns/arrow_decorative_n.png" id="1_fg213"]
@@ -8,17 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://jer2hr1d7u8s" path="res://graphics/UI/PlayerBtns/button_round_flat.png" id="5_l2a3t"]
 [ext_resource type="Texture2D" uid="uid://cnm0buumxbyu6" path="res://graphics/UI/PlayerBtns/button_round_gloss.png" id="6_ldls5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eptpd"]
-size = Vector2(90, 90)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_31rc4"]
-size = Vector2(90, 90)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d28yn"]
-size = Vector2(90, 90)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_88uue"]
-size = Vector2(90, 90)
+size = Vector2(70, 70)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70m8y"]
 radius = 85.0
@@ -31,6 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cjxri")
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -38,46 +30,55 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
-offset_top = -288.0
-offset_right = 296.0
-offset_bottom = -32.0
+offset_top = -384.0
+offset_right = 408.0
+offset_bottom = -16.0
 grow_vertical = 0
+metadata/_edit_lock_ = true
 
 [node name="UpBtn" type="TouchScreenButton" parent="MarginContainer"]
 modulate = Color(1, 1, 1, 0.588235)
-position = Vector2(96, 13)
+position = Vector2(128, 16)
+scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("1_fg213")
-shape = SubResource("RectangleShape2D_eptpd")
+shape = SubResource("RectangleShape2D_d28yn")
 passby_press = true
 action = "Up"
 visibility_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="DownBtn" type="TouchScreenButton" parent="MarginContainer"]
 modulate = Color(1, 1, 1, 0.588235)
-position = Vector2(96, 173)
+position = Vector2(128, 240)
+scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("2_bm53s")
-shape = SubResource("RectangleShape2D_31rc4")
+shape = SubResource("RectangleShape2D_d28yn")
 passby_press = true
 action = "Down"
 visibility_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="LeftBtn" type="TouchScreenButton" parent="MarginContainer"]
 modulate = Color(1, 1, 1, 0.588235)
-position = Vector2(16, 93)
+position = Vector2(16, 128)
+scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("3_glxwo")
 shape = SubResource("RectangleShape2D_d28yn")
 passby_press = true
 action = "Left"
 visibility_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="RightBtn" type="TouchScreenButton" parent="MarginContainer"]
 modulate = Color(1, 1, 1, 0.588235)
-position = Vector2(176, 93)
+position = Vector2(240, 128)
+scale = Vector2(1.7, 1.7)
 texture_normal = ExtResource("4_yseqj")
-shape = SubResource("RectangleShape2D_88uue")
+shape = SubResource("RectangleShape2D_d28yn")
 passby_press = true
 action = "Right"
 visibility_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -86,17 +87,21 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -344.0
-offset_top = -320.0
+offset_left = -376.0
+offset_top = -352.0
+offset_right = -64.0
+offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
+metadata/_edit_lock_ = true
 
 [node name="RadarBtn" type="TouchScreenButton" parent="MarginContainer2"]
 modulate = Color(1, 1, 1, 0.588235)
-position = Vector2(112, 96)
+position = Vector2(96, 80)
 texture_normal = ExtResource("5_l2a3t")
 texture_pressed = ExtResource("6_ldls5")
 shape = SubResource("CircleShape2D_70m8y")
 passby_press = true
 action = "Show_Radar"
 visibility_mode = 1
+metadata/_edit_lock_ = true
